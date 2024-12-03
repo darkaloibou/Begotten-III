@@ -14,7 +14,7 @@ hook.Add("KeyRelease", "KeyReleaseFirearms", function(ply, key)
 		
 		if activeWeapon:IsValid() and activeWeapon.Base == "begotten_firearm_base" and ply:Alive() then
 			if (Clockwork.player:GetAction(ply) == "reloading") then
-				Schema:EasyText(ply, "peru", "Your character is already reloading!");
+				Schema:EasyText(ply, "peru", "Votre personnage est déjà en train de recharger !");
 				
 				return;
 			end
@@ -23,7 +23,7 @@ hook.Add("KeyRelease", "KeyReleaseFirearms", function(ply, key)
 		
 			if activeWeapon.ReloadKeyTime and curTime - activeWeapon.ReloadKeyTime > 0.2 then
 				if (action == "reloading") then
-					Schema:EasyText(ply, "peru", "Your character is already reloading!");
+					Schema:EasyText(ply, "peru", "Votre personnage est déjà en train de recharger !");
 					
 					return;
 				end
@@ -125,7 +125,7 @@ hook.Add("KeyRelease", "KeyReleaseFirearms", function(ply, key)
 					end
 				end
 				
-				Schema:EasyText(ply, "chocolate", "No valid ammo could be found for this weapon!");
+				Schema:EasyText(ply, "chocolate", "Aucune munition valide n'a pu être trouvée pour cette arme!");
 			end
 		end
 	end

@@ -9,7 +9,7 @@
 --setattribute
 
 local COMMAND = Clockwork.command:New("CfgListVars");
-	COMMAND.tip = "List the Clockwork config variables.";
+	COMMAND.tip = "Lister les variables de configuration de Clockwork.";
 	COMMAND.text = "[string Find]";
 	COMMAND.access = "s";
 
@@ -17,12 +17,12 @@ local COMMAND = Clockwork.command:New("CfgListVars");
 	function COMMAND:OnRun(player, arguments)
 		local searchData = arguments[1] or "";
 			netstream.Start(player, "CfgListVars", searchData);
-		Clockwork.player:Notify(player, "The config variables have been printed to the console.");
+		Clockwork.player:Notify(player, "Les variables de configuration ont été imprimées sur la console.");
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("CfgSetVar");
-	COMMAND.tip = "Set a Clockwork config variable.";
+	COMMAND.tip = "Définir une variable de configuration Clockwork.";
 	COMMAND.text = "<string Key> [all Value] [string Map]";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -47,7 +47,7 @@ local COMMAND = Clockwork.command:New("CfgSetVar");
 				keyPrefix = useMap.."'s ";
 				
 				if (!file.Exists("maps/"..useMap..".bsp", "GAME")) then
-					Clockwork.player:Notify(player, useMap.." is not a valid map!");
+					Clockwork.player:Notify(player, useMap.." n'est pas une carte valide!");
 					return;
 				end;
 			end;
@@ -60,29 +60,29 @@ local COMMAND = Clockwork.command:New("CfgSetVar");
 					
 					if (configObject("isPrivate")) then
 						if (configObject("needsRestart")) then
-							Clockwork.player:NotifyAll(player:Name().." set "..keyPrefix..key.." to '"..string.rep("*", string.len(printValue)).."' for the next restart.");
+							Clockwork.player:NotifyAll(player:Name().." a mis "..keyPrefix..key.." à '"..string.rep("*", string.len(printValue)).."' for the next restart.");
 						else
-							Clockwork.player:NotifyAll(player:Name().." set "..keyPrefix..key.." to '"..string.rep("*", string.len(printValue)).."'.");
+							Clockwork.player:NotifyAll(player:Name().." a mis "..keyPrefix..key.." à '"..string.rep("*", string.len(printValue)).."'.");
 						end;
 					elseif (configObject("needsRestart")) then
-						Clockwork.player:NotifyAll(player:Name().." set "..keyPrefix..key.." to '"..printValue.."' for the next restart.");
+						Clockwork.player:NotifyAll(player:Name().." a mis "..keyPrefix..key.." à '"..printValue.."' pour le prochain redémarrage.");
 					else
-						Clockwork.player:NotifyAll(player:Name().." set "..keyPrefix..key.." to '"..printValue.."'.");
+						Clockwork.player:NotifyAll(player:Name().." a mis "..keyPrefix..key.." à '"..printValue.."'.");
 					end;
 				else
-					Clockwork.player:Notify(player, key.." was unable to be set!");
+					Clockwork.player:Notify(player, key.." n'a pas pu être défini!");
 				end;
 			else
-				Clockwork.player:Notify(player, key.." is a static config key!");
+				Clockwork.player:Notify(player, key.." est une clé de configuration statique !");
 			end;
 		else
-			Clockwork.player:Notify(player, key.." is not a valid config key!");
+			Clockwork.player:Notify(player, key.." n'est pas une clé de configuration valide !");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("Announce");
-	COMMAND.tip = "Notify all players on the server.";
+	COMMAND.tip = "Notifier tous les joueurs sur le serveur.";
 	COMMAND.access = "s";
 
 	-- Called when the command has been run.
@@ -128,7 +128,7 @@ COMMAND:Register();
 COMMAND:Register();]]--
 
 local COMMAND = Clockwork.command:New("ClearNPCs");
-	COMMAND.tip = "Clear all decals.";
+	COMMAND.tip = "Effacer tous les autocollants.";
 	COMMAND.access = "a";
 
 	-- Called when the command has been run.
@@ -143,15 +143,15 @@ local COMMAND = Clockwork.command:New("ClearNPCs");
 		end;
 		
 		if (npcs > 0) then
-			Clockwork.player:Notify(player, "You removed "..npcs.." NPCs.");
+			Clockwork.player:Notify(player, "Vous avez supprimé "..npcs.." NPCs.");
 		else
-			Clockwork.player:Notify(player, "There were no npcs to remove.");
+			Clockwork.player:Notify(player, "Il n'y avait aucun PNJ à supprimer.");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyStopSound");
-	COMMAND.tip = "Stop all sounds on a specific player.";
+	COMMAND.tip = "Arrêter tous les sons sur un lecteur spécifique.";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
 	COMMAND.alias = {"CharStopSound", "StopSoundTarget", "StopSoundPlayer"};
@@ -161,7 +161,7 @@ local COMMAND = Clockwork.command:New("PlyStopSound");
 		local target = Clockwork.player:FindByID(arguments[1]);
 
 		if (!target) then
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 			
 			return;
 		end;
@@ -171,7 +171,7 @@ local COMMAND = Clockwork.command:New("PlyStopSound");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("StopSoundGlobal");
-	COMMAND.tip = "Stop all sounds for all players.";
+	COMMAND.tip = "Arrêter tous les sons pour tous les joueurs.";
 	COMMAND.access = "s";
 
 	-- Called when the command has been run.
@@ -183,7 +183,7 @@ local COMMAND = Clockwork.command:New("StopSoundGlobal");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("StopSoundRadius");
-	COMMAND.tip = "Stops all sounds to all players in a specified radius. Default radius is 512.";
+	COMMAND.tip = "Arrête tous les sons pour tous les joueurs dans un rayon spécifié. Le rayon par défaut est 512.";
 	COMMAND.optionalArguments = 1;
 	COMMAND.access = "s";
 	COMMAND.text = "[int Radius]";
@@ -205,7 +205,7 @@ local COMMAND = Clockwork.command:New("StopSoundRadius");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("ClearDecals");
-	COMMAND.tip = "Clear all decals.";
+	COMMAND.tip = "Effacer tous les autocollants.";
 	COMMAND.access = "a";
 
 	-- Called when the command has been run.
@@ -217,7 +217,7 @@ local COMMAND = Clockwork.command:New("ClearDecals");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyReset");
-	COMMAND.tip = "Reset a player.";
+	COMMAND.tip = "Réinitialiser un lecteur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "a";
 	COMMAND.optionalArguments = 1;
@@ -245,12 +245,12 @@ local COMMAND = Clockwork.command:New("PlyReset");
 		target:SetAngles(angles);
 		target:SetEyeAngles(eyeAngles);
 		
-		Clockwork.player:Notify(player, "You have reset "..name..".");
+		Clockwork.player:Notify(player, "Vous avez réinitialisé "..name..".");
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyExtinguish");
-	COMMAND.tip = "Extinguish a player.";
+	COMMAND.tip = "Éteindre un joueur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -266,18 +266,18 @@ local COMMAND = Clockwork.command:New("PlyExtinguish");
 			
 			if (target:IsOnFire()) then
 				target:Extinguish();
-				Clockwork.player:Notify(player, "You have extinguished "..name);
+				Clockwork.player:Notify(player, "Tu as éteint "..name);
 			else
-				Clockwork.player:Notify(player, name.." is not on fire!");
+				Clockwork.player:Notify(player, name.." n'est pas en feu!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyIgnite");
-	COMMAND.tip = "Ignite a player.";
+	COMMAND.tip = "Allumer un joueur.";
 	COMMAND.text = "<string Name> <int Seconds>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -296,26 +296,26 @@ local COMMAND = Clockwork.command:New("PlyIgnite");
 				
 				for _, v in _player.Iterator() do
 					if (v != player and v != target and v:IsAdmin() or v:IsUserGroup("operator")) then
-						Clockwork.player:Notify(player, playerName.." has ignited "..name.." for "..time.." seconds.")
+						Clockwork.player:Notify(player, playerName.." s'est enflammé "..name.." pour "..time.." secondes.")
 					end;
 				end;
 			
-				Clockwork.player:Notify(player, "You have ignited "..name.." for "..time.." seconds.")
+				Clockwork.player:Notify(player, "Tu as allumé "..name.." pour "..time.." secondes.")
 					if (target:IsAdmin()) then
-						Clockwork.player:Notify(target, "You have been ignited by "..playerName.."!");
+						Clockwork.player:Notify(target, "Vous avez été enflammé par "..playerName.."!");
 					end;
 				target:Ignite(time, 0);
 			else
-				Clockwork.player:Notify(player, name.." is already on fire!");
+				Clockwork.player:Notify(player, name.." est déjà en feu!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyWarn");
-	COMMAND.tip = "Add a player to a whitelist.";
+	COMMAND.tip = "Ajouter un joueur à une liste blanche.";
 	COMMAND.text = "<string Name> <string Warning>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -332,21 +332,21 @@ local COMMAND = Clockwork.command:New("PlyWarn");
 			
 			for _, v in _player.Iterator() do
 				if (v != player and v != target and v:IsAdmin() or v:IsUserGroup("operator")) then
-					Clockwork.player:Notify(v, playerName.." has warned "..name.." with the following message: \""..message.."\"")
+					Clockwork.player:Notify(v, playerName.." a prévenu "..name.." avec le message suivant: \""..message.."\"")
 				end;
 			end;
 			
-			Clockwork.kernel:PrintLog(LOGTYPE_MAJOR, playerName.." has warned "..name.." with the following message: \""..message.."\"");
-			Clockwork.player:Notify(target, "You have been warned by "..playerName..": \""..message.."\"");
-			Clockwork.player:Notify(player, "You have warned "..name..": \""..message.."\"");
+			Clockwork.kernel:PrintLog(LOGTYPE_MAJOR, playerName.." a prévenu "..name.." avec le message suivant: \""..message.."\"");
+			Clockwork.player:Notify(target, "Vous avez été prévenu par "..playerName..": \""..message.."\"");
+			Clockwork.player:Notify(player, "Vous avez prévenu "..name..": \""..message.."\"");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("ListColors");
-	COMMAND.tip = "Print all available colors to your console. First argument allows a search of the table.";
+	COMMAND.tip = "Imprime toutes les couleurs disponibles sur votre console. Le premier argument permet une recherche dans la table.";
 	COMMAND.text = "<string Search>";
 	COMMAND.access = "a";
 	COMMAND.optionalArguments = 1;
@@ -374,13 +374,13 @@ local COMMAND = Clockwork.command:New("ListColors");
 				netstream.Heavy(player, "PrintTableWithColor", pon.encode(printTable));
 			netstream.Start(player, "PrintWithColor", "----- END COLOR LIST -----", Color(100, 255, 100));
 		elseif (isstring(search)) then
-			Clockwork.player:Notify(player, "No colors found with the search argument '"..search.."'!")
+			Clockwork.player:Notify(player, "Aucune couleur trouvée avec l'argument de recherche '"..search.."'!")
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PluginLoad");
-	COMMAND.tip = "Attempt to load a plugin.";
+	COMMAND.tip = "Tenter de charger un plugin.";
 	COMMAND.text = "<string Name>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "s";
@@ -391,7 +391,7 @@ local COMMAND = Clockwork.command:New("PluginLoad");
 		local plugin = plugin.FindByID(arguments[1]);
 		
 		if (!plugin) then
-			Clockwork.player:Notify(player, "This plugin is not valid!");
+			Clockwork.player:Notify(player, "Ce plugin n'est pas valide!");
 			return;
 		end;
 		
@@ -403,7 +403,7 @@ local COMMAND = Clockwork.command:New("PluginLoad");
 			local recipients = {};
 			
 			if (bSuccess) then
-				Clockwork.player:NotifyAll(player:Name().." has loaded the "..plugin.name.." plugin for the next restart.");
+				Clockwork.player:NotifyAll(player:Name().." a chargé le "..plugin.name.." plugin pour le prochain redémarrage.");
 				
 				for _, v in _player.Iterator() do
 					if (v:HasInitialized()) then
@@ -418,16 +418,16 @@ local COMMAND = Clockwork.command:New("PluginLoad");
 					netstream.Start(recipients, "SystemPluginSet", {plugin.name, false});
 				end;
 			else
-				Clockwork.player:Notify(player, "This plugin could not be loaded!");
+				Clockwork.player:Notify(player, "Ce plugin n'a pas pu être chargé!");
 			end;
 		else
-			Clockwork.player:Notify(player, "This plugin depends on another plugin!");
+			Clockwork.player:Notify(player, "Ce plugin dépend d'un autre plugin!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PluginUnload");
-	COMMAND.tip = "Attempt to unload a plugin.";
+	COMMAND.tip = "Tenter de décharger un plugin.";
 	COMMAND.text = "<string Name>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "s";
@@ -438,7 +438,7 @@ local COMMAND = Clockwork.command:New("PluginUnload");
 		local plugin = plugin.FindByID(arguments[1]);
 		
 		if (!plugin) then
-			Clockwork.player:Notify(player, "This plugin is not valid!");
+			Clockwork.player:Notify(player, "Ce plugin n'est pas valide!");
 			return;
 		end;
 		
@@ -450,7 +450,7 @@ local COMMAND = Clockwork.command:New("PluginUnload");
 			local recipients = {};
 			
 			if (bSuccess) then
-				Clockwork.player:NotifyAll(player:Name().." has unloaded the "..plugin.name.." plugin for the next restart.");
+				Clockwork.player:NotifyAll(player:Name().." a déchargé le "..plugin.name.." plugin pour le prochain redémarrage.");
 				
 				for _, v in _player.Iterator() do
 					if (v:HasInitialized()) then
@@ -465,16 +465,16 @@ local COMMAND = Clockwork.command:New("PluginUnload");
 					netstream.Start(recipients, "SystemPluginSet", {plugin.name, true});
 				end;
 			else
-				Clockwork.player:Notify(player, "This plugin could not be unloaded!");
+				Clockwork.player:Notify(player, "Ce plugin n'a pas pu être déchargé!");
 			end;
 		else
-			Clockwork.player:Notify(player, "This plugin depends on another plugin!");
+			Clockwork.player:Notify(player, "Ce plugin dépend d'un autre plugin!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("ShutDown");
-	COMMAND.tip = "Shut down the server safely (this is the only way the save data functions will be called, so use this instead of the control panel). Leave the optional argument blank if you want the shut down to be immediate.";
+	COMMAND.tip = "Arrêtez le serveur en toute sécurité (c'est la seule façon d'appeler les fonctions de sauvegarde des données, utilisez donc cette option à la place du panneau de configuration). Laissez l'argument optionnel vide si vous souhaitez que l'arrêt soit immédiat.";
 	COMMAND.text = "[seconds Delay]";
 	COMMAND.access = "s";
 	COMMAND.optionalArguments = 1;
@@ -484,7 +484,7 @@ local COMMAND = Clockwork.command:New("ShutDown");
 		local delay = arguments[1];
 	
 		if delay and tonumber(delay) and tonumber(delay) > 0 then
-			local message = "The server will be shutting down in "..tostring(delay).." seconds!";
+			local message = "Le serveur va s'arrêter dans "..tostring(delay).." secondes!";
 		
 			for _, v in _player.Iterator() do
 				Clockwork.player:Notify(v, message);
@@ -500,7 +500,7 @@ local COMMAND = Clockwork.command:New("ShutDown");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("SaveData");
-	COMMAND.tip = "Save the server state manually.";
+	COMMAND.tip = "Enregistrer l’état du serveur manuellement.";
 	COMMAND.access = "s";
 	
 	-- Called when the command has been run.
@@ -510,7 +510,7 @@ local COMMAND = Clockwork.command:New("SaveData");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("ToggleCharSwapping");
-	COMMAND.tip = "Toggle whether or not charswapping should be enabled. Will only apply to alive characters and non-admins.";
+	COMMAND.tip = "Activer ou non l'échange de caractères. S'applique uniquement aux personnages vivants et aux non-administrateurs.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"CharSwappingToggle", "DisableCharSwapping", "EnableCharSwapping"};
 
@@ -518,20 +518,20 @@ local COMMAND = Clockwork.command:New("ToggleCharSwapping");
 	function COMMAND:OnRun(player, arguments)
 		if Clockwork.charSwappingDisabled then
 			Clockwork.charSwappingDisabled = false;
-			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has enabled charswapping for non-admins.");
+			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." a activé l'échange de caractères pour les non-administrateurs.");
 			
 			if Schema.fuckerJoeActive then
 				Schema.fuckerJoeActive = false;
 			end
 		else
 			Clockwork.charSwappingDisabled = true;
-			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has disabled charswapping for non-admins.");
+			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." a désactivé l'échange de caractères pour les non-administrateurs.");
 		end
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("ToggleFactionRatio");
-	COMMAND.tip = "Toggle whether or not the faction ratio system should be enabled.";
+	COMMAND.tip = "Activer ou non le système de ratio de faction.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"ToggleRatio", "FactionRatio", "RatioToggle"};
 
@@ -539,10 +539,10 @@ local COMMAND = Clockwork.command:New("ToggleFactionRatio");
 	function COMMAND:OnRun(player, arguments)
 		if Clockwork.config:Get("faction_ratio_enabled"):Get() then
 			Clockwork.config:Get("faction_ratio_enabled"):Set(false);
-			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has disabled the faction ratio system.");
+			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." a désactivé le système de ratio de faction.");
 		else
 			Clockwork.config:Get("faction_ratio_enabled"):Set(true);
-			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." has enabled the faction ratio system.");
+			Schema:EasyText(Schema:GetAdmins(), "cornflowerblue", player:Name().." a activé le système de ratio de faction.");
 		end
 	end;
 COMMAND:Register();

@@ -4,7 +4,7 @@
 --]]
 
 local COMMAND = Clockwork.command:New("W");
-	COMMAND.tip = "Whisper to characters near you.";
+	COMMAND.tip = "Murmure aux personnages proches de toi.";
 	COMMAND.text = "<string Text>";
 	COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
 	COMMAND.arguments = 1;
@@ -16,7 +16,7 @@ local COMMAND = Clockwork.command:New("W");
 		local text = table.concat(arguments, " ");
 		
 		if (text == "") then
-			Clockwork.player:Notify(player, "You did not specify enough text!");
+			Clockwork.player:Notify(player, "Vous n'avez pas spécifié suffisamment de texte!");
 			
 			return;
 		end;
@@ -36,7 +36,7 @@ local COMMAND = Clockwork.command:New("W");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("Y");
-	COMMAND.tip = "Yell to characters near you.";
+	COMMAND.tip = "Criez aux personnages proches de vous.";
 	COMMAND.text = "<string Text>";
 	COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
 	COMMAND.arguments = 1;
@@ -47,7 +47,7 @@ local COMMAND = Clockwork.command:New("Y");
 		local text = table.concat(arguments, " ");
 		
 		if (text == "") then
-			Clockwork.player:Notify(player, "You did not specify enough text!");
+			Clockwork.player:Notify(player, "Vous n'avez pas spécifié suffisamment de texte!");
 			
 			return;
 		end;
@@ -79,7 +79,7 @@ local COMMAND = Clockwork.command:New("Y");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("Su");
-	COMMAND.tip = "Send a private message to all superadmins.";
+	COMMAND.tip = "Envoyer un message privé à tous les super-administrateurs.";
 	COMMAND.text = "<string Msg>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -121,13 +121,13 @@ COMMAND:Register();
 COMMAND:Register();]]--
 
 local COMMAND = Clockwork.command:New("Roll");
-	COMMAND.tip = "Roll a number between 0 and the specified number.";
+	COMMAND.tip = "Lancez un nombre entre 0 et le nombre spécifié.";
 	COMMAND.text = "[number Range]";
 
 	-- Called when the command has been run.
 	function COMMAND:OnRun(player, arguments)
 		if player.possessor and IsValid(player.possessor) then
-			Clockwork.player:Notify(player, "You cannot perform this action!");
+			Clockwork.player:Notify(player, "Vous ne pouvez pas effectuer cette action !");
 			
 			return;
 		end
@@ -140,7 +140,7 @@ local COMMAND = Clockwork.command:New("Roll");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PM");
-	COMMAND.tip = "Send a private message to an admin.";
+	COMMAND.tip = "Envoyer un message privé à un administrateur.";
 	COMMAND.text = "<string Name> <string Text>";
 	--COMMAND.flags = CMD_DEFAULT;
 	COMMAND.arguments = 2;
@@ -159,10 +159,10 @@ local COMMAND = Clockwork.command:New("PM");
 					Clockwork.chatBox:Add({player, target}, player, "pm", table.concat(arguments, " ", 2));
 				--end;
 			else
-				Clockwork.player:Notify(player, "You can only privately message admins!");
+				Clockwork.player:Notify(player, "Vous ne pouvez envoyer des messages privés qu'aux administrateurs!");
 			end
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
@@ -191,7 +191,7 @@ COMMAND:Register();
 COMMAND:Register();]]--
 
 local COMMAND = Clockwork.command:New("Me");
-	COMMAND.tip = "Speak in third person to others around you.";
+	COMMAND.tip = "Parlez à la troisième personne aux autres autour de vous.";
 	COMMAND.text = "<string Text>";
 	COMMAND.flags = bit.bor(CMD_DEFAULT, CMD_DEATHCODE);
 	COMMAND.arguments = 1;
@@ -202,7 +202,7 @@ local COMMAND = Clockwork.command:New("Me");
 		local text = table.concat(arguments, " ");
 		
 		if (text == "") then
-			Clockwork.player:Notify(player, "You did not specify enough text!");
+			Clockwork.player:Notify(player, "Vous n'avez pas spécifié suffisamment de texte!");
 			
 			return;
 		end;
@@ -211,7 +211,7 @@ local COMMAND = Clockwork.command:New("Me");
 			if player.victim and IsValid(player.victim) then
 				Clockwork.chatBox:AddInTargetRadius(player.victim, "me", string.gsub(text, "^.", string.lower), player.victim:GetPos(), config.Get("talk_radius"):Get() * 2);
 			elseif player.possessor and IsValid(player.possessor) then
-				Clockwork.player:Notify(player, "You cannot perform this action!");
+				Clockwork.player:Notify(player, "Vous ne pouvez pas effectuer cette action!");
 				
 				return;
 			else
@@ -222,7 +222,7 @@ local COMMAND = Clockwork.command:New("Me");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("It");
-	COMMAND.tip = "Describe a local action or event.";
+	COMMAND.tip = "Décrivez une action ou un événement local.";
 	COMMAND.text = "<string Text>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.arguments = 1;
@@ -232,13 +232,13 @@ local COMMAND = Clockwork.command:New("It");
 		local text = table.concat(arguments, " ");
 		
 		if (string.len(text) < 8) then
-			Clockwork.player:Notify(player, "You did not specify enough text!");
+			Clockwork.player:Notify(player, "Vous n'avez pas spécifié suffisamment de texte !");
 			
 			return;
 		end;
 		
 		if player.possessor and IsValid(player.possessor) then
-			Clockwork.player:Notify(player, "You cannot perform this action!");
+			Clockwork.player:Notify(player, "Vous ne pouvez pas effectuer cette action !");
 			
 			return;
 		end
@@ -250,7 +250,7 @@ local COMMAND = Clockwork.command:New("It");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("Event");
-	COMMAND.tip = "Send an event to all characters.";
+	COMMAND.tip = "Envoyer un événement à tous les personnages.";
 	COMMAND.text = "<string Text>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -263,7 +263,7 @@ local COMMAND = Clockwork.command:New("Event");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("AdminChat");
-	COMMAND.tip = "Communicate with other admins.";
+	COMMAND.tip = "Communiquez avec d'autres administrateurs.";
 	COMMAND.text = "<string Text>";
 	COMMAND.access = "a";
 	COMMAND.arguments = 1;
@@ -286,7 +286,7 @@ local COMMAND = Clockwork.command:New("AdminChat");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("AdminHelp");
-COMMAND.tip = "Send a message to the admins.";
+COMMAND.tip = "Envoyer un message aux administrateurs.";
 COMMAND.text = "<string Message>";
 --COMMAND.flags = CMD_DEFAULT;
 COMMAND.arguments = 1;
@@ -298,19 +298,19 @@ function COMMAND:OnRun(player, arguments)
 
     for _, v in _player.Iterator() do
 		if (Clockwork.player:IsAdmin(v)) then
-            Clockwork.player:Notify(v, "[ADMINHELP] "..player:Name()..": "..message);
+            Clockwork.player:Notify(v, "[AIDE ADMINISTRATIVE] "..player:Name()..": "..message);
         end;
     end;
 	
 	if not Clockwork.player:IsAdmin(player) then
-		Clockwork.player:Notify(player, "[ADMINHELP] "..player:Name()..": "..message);
+		Clockwork.player:Notify(player, "[AIDE ADMINISTRATIVE] "..player:Name()..": "..message);
 	end
 end;
 
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("AdminReply");
-COMMAND.tip = "Send a message to a player as an adminhelp reply.";
+COMMAND.tip = "Envoyer un message à un joueur en tant que réponse d'administrateur.";
 COMMAND.text = "<string Name> <string Message>";
 --COMMAND.flags = CMD_DEFAULT;
 COMMAND.access = "s";
@@ -323,10 +323,10 @@ function COMMAND:OnRun(player, arguments)
 	if (target) then
 		local message = "\""..table.concat(arguments, " ", 2).."\"";
 		
-		Clockwork.player:Notify(target, "[ADMINHELP RESPONSE] "..message);
-		Clockwork.player:Notify(Schema:GetAdmins(), "[ADMINHELP RESPONSE] "..player:Name().." to "..target:Name()..": "..message);
+		Clockwork.player:Notify(target, "[RÉPONSE DE L'AIDE ADMINISTRATIVE] "..message);
+		Clockwork.player:Notify(Schema:GetAdmins(), "[RÉPONSE DE L'AIDE ADMINISTRATIVE] "..player:Name().." to "..target:Name()..": "..message);
 	else
-		Schema:EasyText(player, "grey", "["..self.name.."] "..arguments[1].." is not a valid player!");
+		Schema:EasyText(player, "grey", "["..self.name.."] "..arguments[1].." n'est pas un joueur valide!");
 	end;
 end;
 

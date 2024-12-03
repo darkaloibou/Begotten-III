@@ -275,7 +275,7 @@ if SERVER then
 				game.ConsoleCommand("bot\n")
 			end;
 		else
-			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." has tried to run the botfill console command!");
+			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." a essayé d'exécuter la commande de la console botfill!");
 		end;
 	end);
 	
@@ -300,7 +300,7 @@ if SERVER then
 				end
 			end
 		else
-			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." has tried to run the botteleportall console command!");
+			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." a essayé d'exécuter la commande de console botteleportall!");
 		end;
 	end);
 
@@ -339,7 +339,7 @@ if SERVER then
 				end;
 			end;
 		else
-			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." has tried to run the botfullequip console command!");
+			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." a essayé d'exécuter la commande de console botfullequip!");
 		end;
 	end);
 
@@ -365,7 +365,7 @@ if SERVER then
 				end;
 			end;
 		else
-			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." has tried to run the botdistortedring console command!");
+			Schema:EasyText(Schema:GetAdmins(), "lightslategrey", player:Name().." a essayé d'exécuter la commande de console botdistortedring!");
 		end;
 	end);
 end

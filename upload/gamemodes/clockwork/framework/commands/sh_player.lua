@@ -6,7 +6,7 @@
 --]]
 
 local COMMAND = Clockwork.command:New("PlaySoundGlobal");
-	COMMAND.tip = "Play a sound on all player's clients. All arguments after the first may be player names, which the sound WILL NOT play on.";
+	COMMAND.tip = "Jouer un son sur tous les clients du joueur. Tous les arguments après le premier peuvent être des noms de joueurs, sur lesquels le son NE SERA PAS joué.";
 	COMMAND.text = "<string SoundName> [int Level] [int Pitch] [varargs RecipientFilter]";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -62,15 +62,15 @@ local COMMAND = Clockwork.command:New("PlaySoundGlobal");
 			end;
 			
 			netstream.Start(playerTable, "EmitSound", info);
-			Clockwork.player:Notify(player, "Playing Sound Globally: "..arguments[1]..addon);
+			Clockwork.player:Notify(player, "Jouer du son à l'échelle mondiale: "..arguments[1]..addon);
 		else
-			Clockwork.player:Notify(player, "You must specify a valid sound!");
+			Clockwork.player:Notify(player, "Vous devez spécifier un son valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlaySound");
-	COMMAND.tip = "Play a sound for a player. If a fifth argument is specified, the sound will not play for you.";
+	COMMAND.tip = "Jouer un son pour un joueur. Si un cinquième argument est spécifié, le son ne sera pas joué pour vous.";
 	COMMAND.text = "<string Name> <string SoundName> [int Level 0-511] [int Pitch 30-255] [bool NoEavesdrop]";
 	COMMAND.access = "o";
 	COMMAND.arguments = 2;
@@ -97,16 +97,16 @@ local COMMAND = Clockwork.command:New("PlaySound");
 					netstream.Start(player, "EmitSound", info);
 				end;
 			else
-				Clockwork.player:Notify(player, "You must specify a valid sound!");
+				Clockwork.player:Notify(player, "Vous devez spécifier un son valide!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("EmitSound");
-	COMMAND.tip = "Emit a sound. Specifying a fourth argument attaches the sound to you. Specifying a fifth argument will search for a player to attach the sound to. If no fourth or fifth argument is specified, the sound will be emitted from your cursor. If your cursor hits an entity, the entity will emit the sound.";
+	COMMAND.tip = "Émettre un son. La spécification d'un quatrième argument associe le son à vous. La spécification d'un cinquième argument recherchera un lecteur auquel associer le son. Si aucun quatrième ou cinquième argument n'est spécifié, le son sera émis depuis votre curseur. Si votre curseur touche une entité, l'entité émettra le son.";
 	COMMAND.text = "<string SoundName> [int Level 0-511] [int Pitch 30-255] [bool Attach] [string PlayerName]";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -152,13 +152,13 @@ local COMMAND = Clockwork.command:New("EmitSound");
 			
 			netstream.Start(nil, "EmitSound", info);
 		else
-			Clockwork.player:Notify(player, "You must specify a valid sound!");
+			Clockwork.player:Notify(player, "Vous devez spécifier un son valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyBan");
-	COMMAND.tip = "Ban a player from the server.";
+	COMMAND.tip = "Bannir un joueur du serveur.";
 	COMMAND.text = "<string Name|SteamID|IPAddress> <number Minutes> [string Reason]";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -186,35 +186,35 @@ local COMMAND = Clockwork.command:New("PlyBan");
 								local hours = math.Round(duration / 3600);
 								
 								if (hours >= 1) then
-									Clockwork.player:NotifyAll(player:Name().." has banned '"..steamName.."' for "..hours.." hour(s) ("..reason..").");
+									Clockwork.player:NotifyAll(player:Name().." a interdit '"..steamName.."' pour "..hours.." heures(s) ("..reason..").");
 								else
-									Clockwork.player:NotifyAll(player:Name().." has banned '"..steamName.."' for "..math.Round(duration / 60).." minute(s) ("..reason..").");
+									Clockwork.player:NotifyAll(player:Name().." a interdit '"..steamName.."' pour "..math.Round(duration / 60).." minute(s) ("..reason..").");
 								end;
 							else
-								Clockwork.player:NotifyAll(player:Name().." has banned '"..steamName.."' permanently ("..reason..").");
+								Clockwork.player:NotifyAll(player:Name().." a interdit '"..steamName.."' de mannière permanante pour ("..reason..").");
 							end;
 						else
-							Clockwork.player:Notify(player, "This is not a valid identifier!");
+							Clockwork.player:Notify(player, "Ce n'est pas un identifiant valide!");
 						end;
 					end;
 				end);
 			else
-				Clockwork.player:Notify(player, "This is not a valid duration!");
+				Clockwork.player:Notify(player, "Ce n'est pas une durée valide!");
 			end;
 		else
 			local target = Clockwork.player:FindByID(arguments[1]);
 			
 			if (target) then
-				Clockwork.player:Notify(player, target:Name().." is protected!");
+				Clockwork.player:Notify(player, target:Name().." est protégé!");
 			else
-				Clockwork.player:Notify(player, "This player is protected!");
+				Clockwork.player:Notify(player, "Ce joueur est protégé!");
 			end;
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyGiveFlags");
-	COMMAND.tip = "Give flags to a player. These flags will persist across characters.";
+	COMMAND.tip = "Donnez des drapeaux à un joueur. Ces drapeaux persisteront sur tous les personnages.";
 	COMMAND.text = "<string Name> <string Flag(s)>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -224,29 +224,29 @@ local COMMAND = Clockwork.command:New("PlyGiveFlags");
 		local target = Clockwork.player:FindByID(arguments[1])
 		
 		if (istable(target)) then
-			Clockwork.player:Notify(player, "Too many players with the identifier '"..arguments[1].."' were found. Re-enter the command with a specific player's name!");
+			Clockwork.player:Notify(player, "Trop de joueurs avec l'identifiant '"..arguments[1].."' ont été trouvés. Entrez à nouveau la commande avec le nom d'un joueur spécifique !");
 			return;
 		end;
 		
 		if (target) then
 			if (string.find(arguments[2], "a") or string.find(arguments[2], "s") or string.find(arguments[2], "o")) then
 				if (!Clockwork.player:IsProtected(player)) then
-					Clockwork.player:Notify(player, "You cannot give 'o', 'a' or 's' flags!");
+					Clockwork.player:Notify(player, "Vous ne pouvez pas donner de drapeaux 'o', 'a' ou 's '!");
 					return;
 				end
 			end;
 			
 			Clockwork.player:GivePlayerFlags(target, arguments[2]);
-			Clockwork.player:NotifyAll(player:Name().." gave "..target:Name().." '"..arguments[2].."' player flags.");
+			Clockwork.player:NotifyAll(player:Name().." a donné "..target:Name().." '"..arguments[2].."' drapeaux des joueurs.");
 			target:SaveCharacter();
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyMute");
-	COMMAND.tip = "Mute a player.";
+	COMMAND.tip = "Couper le son d'un joueur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -263,13 +263,13 @@ local COMMAND = Clockwork.command:New("PlyMute");
 			
 			Clockwork.player:NotifyAdmins("operator", player:Name().." has muted "..name..".");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyUnmute");
-	COMMAND.tip = "Unmute a player.";
+	COMMAND.tip = "Rétablir le son d'un joueur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -286,13 +286,13 @@ local COMMAND = Clockwork.command:New("PlyUnmute");
 			
 			Clockwork.player:NotifyAdmins("operator", player:Name().." has unmuted "..name..".");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyMuteAll");
-	COMMAND.tip = "Mute a player.";
+	COMMAND.tip = "Couper le son d'un joueur.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"CharMuteAll", "MuteAll", "GagAll", "PlyGagAll", "CharGagAll"};
 
@@ -304,12 +304,12 @@ local COMMAND = Clockwork.command:New("PlyMuteAll");
 			end;
 		end;
 		
-		Clockwork.player:NotifyAdmins("operator", player:Name().." has muted all players.");
+		Clockwork.player:NotifyAdmins("operator", player:Name().." a mis tous les joueurs en sourdine.");
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyUnmuteAll");
-	COMMAND.tip = "Unmute a player.";
+	COMMAND.tip = "Rétablir le son d'un joueur.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"CharUnmuteAll", "UnmuteAll", "UngagAll", "PlyUngagAll", "CharUngagAll"};
 
@@ -321,12 +321,12 @@ local COMMAND = Clockwork.command:New("PlyUnmuteAll");
 			end;
 		end;
 		
-		Clockwork.player:NotifyAdmins("operator", player:Name().." has unmuted all players.");
+		Clockwork.player:NotifyAdmins("operator", player:Name().." a désactivé le son de tous les joueurs.");
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyFreeze");
-	COMMAND.tip = "Toggle freeze a player.";
+	COMMAND.tip = "Activer/désactiver le gel d'un joueur.";
 	COMMAND.text = "<string Name> [bool Freeze 0-1] [bool Force 0-1]";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -348,10 +348,10 @@ local COMMAND = Clockwork.command:New("PlyFreeze");
 				
 				if (!arguments[3]) then
 					if (freeze == true and isFrozen) then
-						Clockwork.player:Notify(player, name.." is already frozen!");
+						Clockwork.player:Notify(player, name.." est déjà gelé!");
 						return;
 					elseif (freeze == false and !isFrozen) then
-						Clockwork.player:Notify(player, name.." is not frozen!");
+						Clockwork.player:Notify(player, name.." n'est pas gelé!");
 						return;
 					end;
 				end;
@@ -372,16 +372,16 @@ local COMMAND = Clockwork.command:New("PlyFreeze");
 			end;
 			
 			if (didFreeze != nil) then
-				Clockwork.player:Notify(player, "You have "..didFreeze.." "..name..".");
+				Clockwork.player:Notify(player, "Tu as "..didFreeze.." "..name..".");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide !");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("FreezeAll");
-	COMMAND.tip = "Freeze all non-admins on the map.";
+	COMMAND.tip = "Geler tous les non-administrateurs sur la carte.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"PlyFreezeAll", "CharFreezeAll"};
 
@@ -393,12 +393,12 @@ local COMMAND = Clockwork.command:New("FreezeAll");
 			end;
 		end;
 		
-		Clockwork.player:NotifyAdmins("operator", player:Name().." has frozen all non-admin players.", nil);
+		Clockwork.player:NotifyAdmins("operator", player:Name().." a gelé tous les joueurs non administrateurs.", nil);
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("UnFreezeAll");
-	COMMAND.tip = "Unfreeze all non-admins on the map.";
+	COMMAND.tip = "Débloquer tous les non-administrateurs sur la carte.";
 	COMMAND.access = "s";
 	COMMAND.alias = {"PlyUnFreezeAll", "CharUnFreezeAll"};
 
@@ -410,12 +410,12 @@ local COMMAND = Clockwork.command:New("UnFreezeAll");
 			end;
 		end;
 		
-		Clockwork.player:NotifyAdmins("operator", player:Name().." has unfrozen all non-admin players.", nil);
+		Clockwork.player:NotifyAdmins("operator", player:Name().." a débloqué tous les joueurs non administrateurs.", nil);
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawn");
-	COMMAND.tip = "Respawn a player at their default spawnpoint.";
+	COMMAND.tip = "Réapparaître un joueur à son point d'apparition par défaut.";
 	COMMAND.text = "<string Name> [bool Bring] [bool Freeze]";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -460,13 +460,13 @@ local COMMAND = Clockwork.command:New("PlyRespawn");
 				target:Freeze(true);
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawnBring");
-	COMMAND.tip = "Respawn a player and bring them to your crosshair position.";
+	COMMAND.tip = "Faites réapparaître un joueur et amenez-le à votre position de réticule.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -478,7 +478,7 @@ local COMMAND = Clockwork.command:New("PlyRespawnBring");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawnBringFreeze");
-	COMMAND.tip = "Respawn a player and bring them to your crosshair position, as well as freeze them.";
+	COMMAND.tip = "Réapparaître un joueur et l'amener à votre position de réticule, ainsi que le geler.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -490,7 +490,7 @@ local COMMAND = Clockwork.command:New("PlyRespawnBringFreeze");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawnStay");
-	COMMAND.tip = "Respawn a player at their last place of death.";
+	COMMAND.tip = "Faire réapparaître un joueur à son dernier lieu de mort.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -526,13 +526,13 @@ local COMMAND = Clockwork.command:New("PlyRespawnStay");
 				target:SetEyeAngles(target.cwDeathAngles);
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid character!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un caractère valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawnStayFreeze");
-	COMMAND.tip = "Respawn a player at their last place of death and freeze them.";
+	COMMAND.tip = "Réapparaître un joueur à son dernier lieu de mort et le geler.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -544,7 +544,7 @@ local COMMAND = Clockwork.command:New("PlyRespawnStayFreeze");
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyRespawnStayAll");
-	COMMAND.tip = "Respawn all dead players at the position where they died. You may specify individual names to exempt from the mass-respawn.";
+	COMMAND.tip = "Réapparaître tous les joueurs morts à l'endroit où ils sont morts. Vous pouvez spécifier des noms individuels à exempter de la réapparition en masse.";
 	COMMAND.text = "<vararg Ignore>";
 	COMMAND.access = "s";
 	COMMAND.optionalArgument = 1;
@@ -574,15 +574,15 @@ local COMMAND = Clockwork.command:New("PlyRespawnStayAll");
 		end;
 		
 		if (#respawned > 0) then
-			Clockwork.player:Notify(player, "You respawned the following players: "..table.concat(respawned, ", ")..".");
+			Clockwork.player:Notify(player, "Vous avez réapparu les joueurs suivants: "..table.concat(respawned, ", ")..".");
 		else
-			Clockwork.player:Notify(player, "There were no dead players to respawn!");
+			Clockwork.player:Notify(player, "Il n'y avait aucun joueur mort à réapparaître!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("GetFlags");
-	COMMAND.tip = "Get the important flags (petcrnCW). You may specify the name of a player to give these flags to. Second argument makes flags persist across characters.";
+	COMMAND.tip = "Récupérez les drapeaux importants (petcrnCW). Vous pouvez spécifier le nom d'un joueur à qui donner ces drapeaux. Le deuxième argument fait persister les drapeaux sur tous les personnages.";
 	COMMAND.text = "<string Name> <bool PlayerFlags>";
 	COMMAND.access = "s";
 	COMMAND.optionalArguments = 2;
@@ -598,7 +598,7 @@ local COMMAND = Clockwork.command:New("GetFlags");
 			local plyTarget = Clockwork.player:FindByID(arguments[1]);
 			
 			if (istable(plyTarget)) then
-				Clockwork.player:Notify(player, "Too many players with the identifier '"..arguments[1].."' were found. Re-enter the command with a specific player's name!");
+				Clockwork.player:Notify(player, "Trop de joueurs avec l'identifiant '"..arguments[1].."' ont été trouvés. Entrez à nouveau la commande avec le nom d'un joueur spécifique!");
 				return;
 			end;
 		
@@ -624,13 +624,14 @@ local COMMAND = Clockwork.command:New("GetFlags");
 		if (string.len(flagString) > 0) then
 			player:RunClockworkCmd(command, name, flagString);
 		else
-			Clockwork.player:Notify(player, "No flags were found!");
+			Clockwork.player:Notify(player, "Aucun rôle n'a été trouvé!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlySlay");
-	COMMAND.tip = "Slay a player. Using \"silent slay\" will instantly respawn the player at a spawnpoint. \"Bring\" argument is only used when silent slay is true.";
+	COMMAND.tip = "Tuez un joueur. Utiliser \"tuer en silence\" fera instantanément réapparaître le joueur à un point d'apparition. L'argument \"Bring\" n'est utilisé que lorsque «tuer en silence »
+	 est vrai.";
 	COMMAND.text = "<string Name> [bool Silent] [bool Bring]";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -677,7 +678,7 @@ local COMMAND = Clockwork.command:New("PlySlay");
 								["Female"] = "her",
 							};
 
-							addon = " and brought "..thirdPerson[gender].." to your cursor.";
+							addon = " et apporté "..thirdPerson[gender].." à votre curseur.";
 							
 							timer.Simple(frameTime * 2, function()
 								local trace = player:GetEyeTraceNoCursor();
@@ -690,29 +691,29 @@ local COMMAND = Clockwork.command:New("PlySlay");
 							end);
 						end;
 						
-						message = "You have silently slain "..name..addon;
+						message = "Tu as tué silencieusement "..name..addon;
 					else
 						target:Kill();
-						message = "You have slain "..name..".";
+						message = "Tu as tué "..name..".";
 					end;
 				else
-					message = name.." is already dead!";
+					message = name.." est déjà mort!";
 				end;
 				
 				if (message) then
 					Clockwork.player:Notify(player, message);
 				end;
 			else
-				Clockwork.player:Notify(player, "No players alive found with the identifier '"..string.gsub(arguments[1], "^.", string.upper).."'!");
+				Clockwork.player:Notify(player, "Aucun joueur vivant trouvé avec l'identifiant '"..string.gsub(arguments[1], "^.", string.upper).."'!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide !");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyDemote");
-	COMMAND.tip = "Demote a player from their user group.";
+	COMMAND.tip = "Rétrograder un joueur de son groupe d'utilisateurs.";
 	COMMAND.text = "<string Name>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "s";
@@ -726,7 +727,7 @@ local COMMAND = Clockwork.command:New("PlyDemote");
 			if (!Clockwork.player:IsProtected(player)) then
 				local userGroup = target:GetClockworkUserGroup();
 				
-				Clockwork.player:NotifyAll(player:Name().." has attempted to demote "..target:Name().." from "..userGroup.." to user, but he doesn't have fucking permission to do that!!!");
+				Clockwork.player:NotifyAll(player:Name().." a tenté de rétrograder "..target:Name().." depuis "..userGroup.." à l'utilisateur, mais il n'a pas la permission de faire ça!!!");
 
 				return false;
 			end
@@ -735,23 +736,23 @@ local COMMAND = Clockwork.command:New("PlyDemote");
 				local userGroup = target:GetClockworkUserGroup();
 				
 				if (userGroup != "user") then
-					Clockwork.player:NotifyAll(player:Name().." has demoted "..target:Name().." from "..userGroup.." to user.");
+					Clockwork.player:NotifyAll(player:Name().." a rétrogradé "..target:Name().." depuis "..userGroup.." à l'utilisateur.");
 						target:SetClockworkUserGroup("user");
 					Clockwork.player:LightSpawn(target, true, true);
 				else
-					Clockwork.player:Notify(player, "This player is only a user and cannot be demoted!");
+					Clockwork.player:Notify(player, "Ce joueur n'est qu'un utilisateur et ne peut pas être rétrogradé !");
 				end;
 			else
-				Clockwork.player:Notify(player, target:Name().." is protected!");
+				Clockwork.player:Notify(player, target:Name().." est protégé !");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyGoto");
-	COMMAND.tip = "Goto a player's location.";
+	COMMAND.tip = "Accéder à l'emplacement d'un joueur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -766,15 +767,15 @@ local COMMAND = Clockwork.command:New("PlyGoto");
 			end
 		
 			Clockwork.player:SetSafePosition(player, target:GetPos());
-			Clockwork.player:NotifyAll(player:Name().." has gone to "..target:Name().."'s location.");
+			Clockwork.player:NotifyAll(player:Name().." est allé à "..target:Name().." à son emplacement.");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlySearch");
-	COMMAND.tip = "Search a players inventory.";
+	COMMAND.tip = "Rechercher l'inventaire d'un joueur.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 1;
@@ -809,19 +810,19 @@ local COMMAND = Clockwork.command:New("PlySearch");
 						end
 					});
 				else
-					Clockwork.player:Notify(player, "You are already searching a character!");
+					Clockwork.player:Notify(player, "Vous recherchez déjà un personnage!");
 				end;
 			else
-				Clockwork.player:Notify(player, target:Name().." is already being searched!");
+				Clockwork.player:Notify(player, target:Name().." est déjà recherché!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyKick");
-	COMMAND.tip = "Kick a player from the server.";
+	COMMAND.tip = "Expulser un joueur du serveur.";
 	COMMAND.text = "<string Name> <string Reason>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -834,25 +835,25 @@ local COMMAND = Clockwork.command:New("PlyKick");
 		local reason = table.concat(arguments, " ", 2);
 		
 		if (!reason or reason == "") then
-			reason = "reason not specified";
+			reason = "raison non spécifiée";
 		end;
 		
 		if (target) then
 			if (!Clockwork.player:IsProtected(arguments[1])) then
-				Clockwork.player:NotifyAll(player:Name().." has kicked '"..target:Name().."' ("..reason..").");
+				Clockwork.player:NotifyAll(player:Name().." a donné un coup de pied '"..target:Name().."' ("..reason..").");
 					target:Kick(reason);
 				target.kicked = true;
 			else
-				Clockwork.player:Notify(player, target:Name().." is protected!");
+				Clockwork.player:Notify(player, target:Name().." est protégé!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlySetGroup");
-	COMMAND.tip = "Set a player's user group.";
+	COMMAND.tip = "Définir le groupe d'utilisateurs d'un joueur.";
 	COMMAND.text = "<string Name> <string UserGroup>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "s";
@@ -865,27 +866,27 @@ local COMMAND = Clockwork.command:New("PlySetGroup");
 		
 		if (userGroup != "superadmin" and userGroup != "admin"
 		and userGroup != "operator") then
-			Clockwork.player:Notify(player, "The user group must be superadmin, admin or operator!");
+			Clockwork.player:Notify(player, "Le groupe d'utilisateurs doit être superadministrateur, administrateur ou opérateur!");
 			
 			return;
 		end;
 		
 		if (target) then
 			if (!Clockwork.player:IsProtected(target)) then
-				Clockwork.player:NotifyAll(player:Name().." has set "..target:Name().."'s user group to "..userGroup..".");
+				Clockwork.player:NotifyAll(player:Name().." a mis "..target:Name().." au groupe d'utilisateurs"..userGroup..".");
 					target:SetClockworkUserGroup(userGroup);
 				Clockwork.player:LightSpawn(target, true, true);
 			else
-				Clockwork.player:Notify(player, target:Name().." is protected!");
+				Clockwork.player:Notify(player, target:Name().." est protégé!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyTeleport");
-	COMMAND.tip = "Teleport a player to your target location.";
+	COMMAND.tip = "Téléporter un joueur vers votre emplacement cible.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -903,15 +904,15 @@ local COMMAND = Clockwork.command:New("PlyTeleport");
 			end
 			
 			Clockwork.player:SetSafePosition(target, player:GetEyeTraceNoCursor().HitPos);
-			Clockwork.player:NotifyAll(player:Name().." has teleported "..target:Name().." to their target location.");
+			Clockwork.player:NotifyAll(player:Name().." s'est téléporté "..target:Name().." à leur emplacement cible.");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide !");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyTeleportFreeze");
-	COMMAND.tip = "Teleport a player to your target location.";
+	COMMAND.tip = "Téléporter un joueur vers votre emplacement cible.";
 	COMMAND.text = "<string Name>";
 	COMMAND.access = "o";
 	COMMAND.arguments = 1;
@@ -929,19 +930,19 @@ local COMMAND = Clockwork.command:New("PlyTeleportFreeze");
 			end
 		
 			Clockwork.player:SetSafePosition(target, player:GetEyeTraceNoCursor().HitPos);
-			Clockwork.player:NotifyAll(player:Name().." has teleported "..target:Name().." to their target location.");
+			Clockwork.player:NotifyAll(player:Name().." s'est téléporté "..target:Name().." vers leur emplacement cible.");
 			
 			if (!target:IsFrozen()) then
 				target:Freeze(true);
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyUnban");
-	COMMAND.tip = "Unban a Steam ID from the server.";
+	COMMAND.tip = "Annuler l'exclusion d'un identifiant Steam du serveur.";
 	COMMAND.text = "<string SteamID|IPAddress>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -954,16 +955,16 @@ local COMMAND = Clockwork.command:New("PlyUnban");
 		local identifier = string.upper(arguments[1]);
 		
 		if (Clockwork.bans.stored[identifier]) then
-			Clockwork.player:NotifyAll(player:Name().." has unbanned '"..Clockwork.bans.stored[identifier].steamName.."'.");
+			Clockwork.player:NotifyAll(player:Name().." a débloqué '"..Clockwork.bans.stored[identifier].steamName.."'.");
 			Clockwork.bans:Remove(identifier);
 		else
-			Clockwork.player:Notify(player, "There are no banned players with the '"..identifier.."' identifier!");
+			Clockwork.player:Notify(player, "Il n'y a pas de joueurs bannis avec le '"..identifier.."' identifiant!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyUnwhitelist");
-	COMMAND.tip = "Remove a player from a faction whitelist.";
+	COMMAND.tip = "Supprimer un joueur de la liste blanche d'une faction.";
 	COMMAND.text = "<string Name> <string Faction>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -981,26 +982,26 @@ local COMMAND = Clockwork.command:New("PlyUnwhitelist");
 						Clockwork.player:SetWhitelisted(target, factionTable.name, false);
 						Clockwork.player:SaveCharacter(target);
 						
-						Clockwork.player:Notify(target, "You have been removed from the "..factionTable.name.." whitelist.");
-						Clockwork.player:Notify(player, player:Name().." has removed "..target:Name().." from the "..factionTable.name.." whitelist.");
+						Clockwork.player:Notify(target, "Vous avez été retiré de la "..factionTable.name.." liste blanche.");
+						Clockwork.player:Notify(player, player:Name().." a supprimé "..target:Name().." de la "..factionTable.name.." liste blanche.");
 						--Clockwork.player:NotifyAll(player:Name().." has removed "..target:Name().." from the "..factionTable.name.." whitelist.");
 					else
-						Clockwork.player:Notify(player, target:Name().." is not on the "..factionTable.name.." whitelist!");
+						Clockwork.player:Notify(player, target:Name().." n'est pas sur le "..factionTable.name.." liste blanche!");
 					end;
 				else
-					Clockwork.player:Notify(player, factionTable.name.." does not have a whitelist!");
+					Clockwork.player:Notify(player, factionTable.name.." n'a pas de liste blanche!");
 				end;
 			else
-				Clockwork.player:Notify(player, factionTable.name.." is not a valid faction!");
+				Clockwork.player:Notify(player, factionTable.name.." n'est pas une faction valide!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyUnwhitelistSubfaction");
-	COMMAND.tip = "Remove a player from a subfaction whitelist.";
+	COMMAND.tip = "Supprimer un joueur de la liste blanche d'une sous-faction.";
 	COMMAND.text = "<string Name> <string Subfaction>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -1024,16 +1025,16 @@ local COMMAND = Clockwork.command:New("PlyUnwhitelistSubfaction");
 										Clockwork.player:SetWhitelistedSubfaction(target, subfaction, false);
 										Clockwork.player:SaveCharacter(target);
 										
-										Clockwork.player:Notify(target, "You have been removed from the "..subfaction.." subfaction whitelist.");
-										Clockwork.player:Notify(player, player:Name().." has removed "..target:Name().." from the "..subfaction.." subfaction whitelist.");
+										Clockwork.player:Notify(target, "Vous avez été retiré de la "..subfaction.." liste blanche des sous-factions.");
+										Clockwork.player:Notify(player, player:Name().." a supprimé "..target:Name().." de la "..subfaction.." liste blanche des sous-factions.");
 										--Clockwork.player:NotifyAll(player:Name().." has removed "..target:Name().." from the "..subfaction.." subfaction whitelist.");
 										return;
 									else
-										Clockwork.player:Notify(player, target:Name().." is not on the "..subfaction.." subfaction whitelist!");
+										Clockwork.player:Notify(player, target:Name().." n'est pas sur le "..subfaction.." liste blanche des sous-factions!");
 										return;
 									end;
 								else
-									Clockwork.player:Notify(player, subfaction.." does not have a whitelist!");
+									Clockwork.player:Notify(player, subfaction.." n'a pas de liste blanche!");
 									return;
 								end
 							end;
@@ -1042,15 +1043,15 @@ local COMMAND = Clockwork.command:New("PlyUnwhitelistSubfaction");
 				end
 			end
 			
-			Clockwork.player:Notify(player, subfaction.." is not a valid subfaction!");
+			Clockwork.player:Notify(player, subfaction.." n'est pas une sous-faction valide!");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyVoiceBan");
-	COMMAND.tip = "Ban a player from using voice on the server.";
+	COMMAND.tip = "Interdire à un joueur d'utiliser la voix sur le serveur.";
 	COMMAND.text = "<string Name|SteamID|IPAddress>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -1064,14 +1065,14 @@ local COMMAND = Clockwork.command:New("PlyVoiceBan");
 			if (!target:GetData("VoiceBan")) then
 				target:SetData("VoiceBan", true);
 			else
-				Clockwork.player:Notify(player, target:Name().." is already banned from using voice!");
+				Clockwork.player:Notify(player, target:Name().." est déjà interdit d'utiliser la voix!");
 			end;
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyVoiceUnban");
-	COMMAND.tip = "Unban a player from using voice on the server.";
+	COMMAND.tip = "Annuler l'interdiction d'un joueur d'utiliser la voix sur le serveur.";
 	COMMAND.text = "<string Name|SteamID|IPAddress>";
 	COMMAND.flags = CMD_DEFAULT;
 	COMMAND.access = "o";
@@ -1085,14 +1086,14 @@ local COMMAND = Clockwork.command:New("PlyVoiceUnban");
 			if (target:GetData("VoiceBan")) then
 				target:SetData("VoiceBan", false);
 			else
-				Clockwork.player:Notify(player, target:Name().." is not banned from using voice!");
+				Clockwork.player:Notify(player, target:Name().." il n'est pas interdit d'utiliser la voix!");
 			end;
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyWhitelist");
-	COMMAND.tip = "Whitelist a player for a faction.";
+	COMMAND.tip = "Mettre un joueur sur liste blanche pour une faction.";
 	COMMAND.text = "<string Name> <string Faction>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -1108,26 +1109,26 @@ local COMMAND = Clockwork.command:New("PlyWhitelist");
 						Clockwork.player:SetWhitelisted(target, factionTable.name, true);
 						Clockwork.player:SaveCharacter(target);
 						
-						Clockwork.player:Notify(target, "You have been added to the "..factionTable.name.." whitelist.");
-						Clockwork.player:Notify(player, player:Name().." has added "..target:Name().." to the "..factionTable.name.." whitelist.");
+						Clockwork.player:Notify(target, "Vous avez été ajouté à la "..factionTable.name.." liste blanche.");
+						Clockwork.player:Notify(player, player:Name().." a ajouté "..target:Name().." au "..factionTable.name.." liste blanche.");
 						--Clockwork.player:NotifyAll(player:Name().." has added "..target:Name().." to the "..factionTable.name.." whitelist.");
 					else
-						Clockwork.player:Notify(player, target:Name().." is already on the "..factionTable.name.." whitelist!");
+						Clockwork.player:Notify(player, target:Name().." est déjà sur le "..factionTable.name.." liste blanche!");
 					end;
 				else
-					Clockwork.player:Notify(player, factionTable.name.." does not have a whitelist!");
+					Clockwork.player:Notify(player, factionTable.name.." n'a pas de liste blanche!");
 				end;
 			else
-				Clockwork.player:Notify(player, table.concat(arguments, " ", 2).." is not a valid faction!");
+				Clockwork.player:Notify(player, table.concat(arguments, " ", 2).." n'est pas une faction valide!");
 			end;
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
 
 local COMMAND = Clockwork.command:New("PlyWhitelistSubfaction");
-	COMMAND.tip = "Whitelist a player for a subfaction.";
+	COMMAND.tip = "Mettre un joueur sur liste blanche pour une sous-faction.";
 	COMMAND.text = "<string Name> <string Subfaction>";
 	COMMAND.access = "s";
 	COMMAND.arguments = 2;
@@ -1151,16 +1152,16 @@ local COMMAND = Clockwork.command:New("PlyWhitelistSubfaction");
 										Clockwork.player:SetWhitelistedSubfaction(target, subfaction, true);
 										Clockwork.player:SaveCharacter(target);
 										
-										Clockwork.player:Notify(target, "You have been added to the "..subfaction.." subfaction whitelist.");
-										Clockwork.player:Notify(player, player:Name().." has added "..target:Name().." to the "..subfaction.." subfaction whitelist.");
+										Clockwork.player:Notify(target, "Vous avez été ajouté à la "..subfaction.." liste blanche des sous-factions.");
+										Clockwork.player:Notify(player, player:Name().." a ajouté "..target:Name().." au "..subfaction.." sous-faction whitelist.");
 										--Clockwork.player:NotifyAll(player:Name().." has added "..target:Name().." to the "..subfaction.." whitelist.");
 										return;
 									else
-										Clockwork.player:Notify(player, target:Name().." is already on the "..subfaction.." subfaction whitelist!");
+										Clockwork.player:Notify(player, target:Name().." est déjà sur le "..subfaction.." liste blanche des sous-factions!");
 										return;
 									end;
 								else
-									Clockwork.player:Notify(player, subfaction.." does not have a whitelist!");
+									Clockwork.player:Notify(player, subfaction.." n'a pas de liste blanche!");
 									return;
 								end
 							end;
@@ -1169,9 +1170,9 @@ local COMMAND = Clockwork.command:New("PlyWhitelistSubfaction");
 				end
 			end
 			
-			Clockwork.player:Notify(player, subfaction.." is not a valid subfaction!");
+			Clockwork.player:Notify(player, subfaction.." n'est pas une sous-faction valide!");
 		else
-			Clockwork.player:Notify(player, arguments[1].." is not a valid player!");
+			Clockwork.player:Notify(player, arguments[1].." n'est pas un joueur valide!");
 		end;
 	end;
 COMMAND:Register();
@@ -1203,9 +1204,9 @@ properties.Add("ban", {
 				end
 			end
 		
-			Derma_StringRequest(ent:Name(), "How many minutes would you like to ban them for?", nil, function(minutes)
+			Derma_StringRequest(ent:Name(), "Pendant combien de minutes souhaitez-vous les bannir ?", nil, function(minutes)
 				if IsValid(ent) then
-					Derma_StringRequest(ent:Name(), "What is your reason for banning them?", nil, function(reason)
+					Derma_StringRequest(ent:Name(), "Quelle est votre raison de les interdire ?", nil, function(reason)
 						if IsValid(ent) then
 							Clockwork.kernel:RunCommand("PlyBan", ent:Name(), minutes, reason)
 						end
@@ -1259,7 +1260,7 @@ properties.Add("kick", {
 				end
 			end
 		
-			Derma_StringRequest(ent:Name(), "What is your reason for kicking them?", nil, function(reason)
+			Derma_StringRequest(ent:Name(), "Quelle est la raison pour laquelle tu les as expulsés ??", nil, function(reason)
 				if IsValid(ent) then
 					Clockwork.kernel:RunCommand("PlyKick", ent:Name(), reason)
 				end
