@@ -103,7 +103,7 @@ function PANEL:Rebuild()
 		end;
 	else
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("You do not have access to any "..Clockwork.option:GetKey("name_attributes", true).."!");
+			label:SetText("Vous n'avez accès à aucun "..Clockwork.option:GetKey("name_attributes", true).."!");
 			label:SetInfoColor("red");
 		self.panelList:AddItem(label);
 	end;

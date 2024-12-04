@@ -26,9 +26,9 @@ function PANEL:ShowCategory(category)
 	if (!category) then
 		local masterFormatting = Clockwork.directory:GetMasterFormatting();
 		local finalCode = [[
-			<div class="auraInfoTitle">SELECT A CATEGORY</div>
+			<div class="auraInfoTitle">SÉLECTIONNEZ UNE CATÉGORIE</div>
 			<div class="auraInfoText">
-				Some categories may only be available to users with special priviledges.
+				Certaines catégories peuvent être uniquement accessibles aux utilisateurs disposant de privilèges spéciaux.
 			</div>
 		]];
 		

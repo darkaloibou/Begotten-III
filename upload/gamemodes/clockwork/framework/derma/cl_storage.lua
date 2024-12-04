@@ -83,7 +83,7 @@ function PANEL:Init()
 	local font = Clockwork.fonts:GetMultiplied("nov_IntroTextSmallDETrooper", 2.25);
 	self.cumfont = font;
 	self.closeButton = vgui.Create("DButton", self);
-	self.closeButton:SetText("Close");
+	self.closeButton:SetText("Fermer");
 	self.closeButton:SetFont(font)
 	self.closeButton:SetTextColor(Color(170, 0, 0));
 	local fw, fh = GetFontWidth(font,"Close"),GetFontHeight(font,"Close")
@@ -210,7 +210,7 @@ function PANEL:RebuildPanel(storagePanel, storageType, usedWeight, weight, usedS
 		cashForm = vgui.Create("DForm", storagePanel);
 		button = vgui.Create("DButton", storagePanel);
 		
-		button:SetText("Transfer");
+		button:SetText("Transfert");
 		button.Stretch = true;
 		
 		-- Called when the button is clicked.
@@ -240,7 +240,7 @@ function PANEL:RebuildPanel(storagePanel, storageType, usedWeight, weight, usedS
 	if (storagePanel.usedWeight > 0) then
 		local informationForm = vgui.Create("DForm", storagePanel);
 			informationForm:SetPadding(4);
-			informationForm:SetName("Weight");
+			informationForm:SetName("Poids");
 			informationForm:AddItem(vgui.Create("cwStorageWeight", storagePanel));
 			informationForm.Header:SetEnabled(false);
 		storagePanel:AddItem(informationForm);
@@ -249,7 +249,7 @@ function PANEL:RebuildPanel(storagePanel, storageType, usedWeight, weight, usedS
 	if (Clockwork.inventory:UseSpaceSystem() and storagePanel.usedSpace > 0) then
 		local informationForm = vgui.Create("DForm", storagePanel);
 			informationForm:SetPadding(4);
-			informationForm:SetName("Space");
+			informationForm:SetName("Espace");
 			informationForm:AddItem(vgui.Create("cwStorageSpace", storagePanel));
 			informationForm.Header:SetEnabled(false);
 		storagePanel:AddItem(informationForm);
@@ -500,27 +500,27 @@ function PANEL:RebuildPanel(storagePanel, storageType, usedWeight, weight, usedS
 		local storagename = self.storageType;
 		
 		if (storagename == "Container") then
-			storagename = "This "..string.lower(Clockwork.storage:GetName()).." is";
+			storagename = "Ceci "..string.lower(Clockwork.storage:GetName()).." est";
 			local ent = Clockwork.storage:GetEntity()
 			if (IsValid(ent) and ent:GetClass() == "prop_ragdoll" and Clockwork.entity:GetPlayer(ent)) then
 				local ply = Clockwork.entity:GetPlayer(ent);
 				local recognise = Clockwork.player:DoesRecognise(ply)
 				if (recognise) then
-					storagename = string.Split(Clockwork.player:GetName(ply), " ")[1].."'s pockets are"
+					storagename = string.Split(Clockwork.player:GetName(ply), " ")[1].." dans ses poches"
 				else
 					local gender = ply:GetGender();
-					local n = "His"
+					local n = "Son"
 					if (gender == GENDER_FEMALE) then
-						n = "Her"
+						n = "Sa"
 					end;
-					storagename = n.." pockets are";
+					storagename = n.." dans ses poches";
 				end;
 			end;
 		elseif (storagename == "Inventory") then
-			storagename = "Your sack is"
+			storagename = "Ton sac est"
 		end;
 		
-		local tata = storagename.." empty...";
+		local tata = storagename.." vide...";
 		
 		draw.SimpleText(tata, fo, (w / 2), (h / 2), Color(170, 0, 0, self.ALPG2), 1, 1);
 	end;
@@ -729,10 +729,10 @@ function PANEL:Init()
 	end;
 	
 	local takeFont = Clockwork.fonts:GetMultiplied("nov_IntroTextSmallDETrooper", 0.8);
-	local takeText = "Take"
+	local takeText = "Prendre"
 	
 	if (self.storageType == "Inventory") then
-		takeText = "Give";
+		takeText = "Donner";
 	end;
 	
 	self.takeButton = vgui.Create("DButton", self.infoPlate)
@@ -846,9 +846,9 @@ function PANEL:Init()
 						end
 					end);
 				
-					local amountMenu = menu:AddSubMenu("Give Amount...", function()
+					local amountMenu = menu:AddSubMenu("Donnez le montant...", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name"), "How many items of this type do you want to give?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name"), "Combien d'articles de ce type souhaitez-vous offrir ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageGiveItems", self.itemTable("uniqueID"), amount);
 								end
@@ -858,7 +858,7 @@ function PANEL:Init()
 					
 					local customMenu = amountMenu:AddSubMenu("Custom Amount", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name"), "How many items of this type do you want to give?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name"), "Combien d'articles de ce type souhaitez-vous offrir ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageGiveItems", self.itemTable("uniqueID"), amount);
 								end
@@ -916,7 +916,7 @@ function PANEL:Init()
 					
 					customMenu:AddOption("By Best Condition", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name").." (Best Condition)", "How many items of this type do you want to give?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name").." (Best Condition)", "Combien d'articles de ce type souhaitez-vous offrir ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageGiveItems", self.itemTable("uniqueID"), amount, "bestCondition");
 								end
@@ -926,7 +926,7 @@ function PANEL:Init()
 					
 					customMenu:AddOption("By Worst Condition", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name").." (Worst Condition)", "How many items of this type do you want to give?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name").." (Worst Condition)", "Combien d'articles de ce type souhaitez-vous offrir ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageGiveItems", self.itemTable("uniqueID"), amount, "worstCondition");
 								end
@@ -942,7 +942,7 @@ function PANEL:Init()
 				
 					local amountMenu = menu:AddSubMenu("Take Amount...", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name"), "How many items of this type do you want to take?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name"), "Combien d'articles de ce type souhaitez-vous emporter ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageTakeItems", self.itemTable("uniqueID"), amount);
 								end
@@ -952,7 +952,7 @@ function PANEL:Init()
 					
 					local customMenu = amountMenu:AddSubMenu("Custom Amount", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name"), "How many items of this type do you want to take?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name"), "Combien d'articles de ce type souhaitez-vous emporter ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageTakeItems", self.itemTable("uniqueID"), amount);
 								end
@@ -1010,7 +1010,7 @@ function PANEL:Init()
 					
 					customMenu:AddOption("By Best Condition", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name").." (Best Condition)", "How many items of this type do you want to take?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name").." (Best Condition)", "Combien d'articles de ce type souhaitez-vous emporter ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageTakeItems", self.itemTable("uniqueID"), amount, "bestCondition");
 								end
@@ -1020,7 +1020,7 @@ function PANEL:Init()
 					
 					customMenu:AddOption("By Worst Condition", function()
 						if self.itemTable then
-							Derma_StringRequest(self.itemTable("name").." (Worst Condition)", "How many items of this type do you want to take?", nil, function(amount)
+							Derma_StringRequest(self.itemTable("name").." (Worst Condition)", "Combien d'articles de ce type souhaitez-vous emporter ?", nil, function(amount)
 								if self.itemTable then
 									Clockwork.kernel:RunCommand("StorageTakeItems", self.itemTable("uniqueID"), amount, "worstCondition");
 								end

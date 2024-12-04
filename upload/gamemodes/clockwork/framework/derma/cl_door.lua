@@ -46,13 +46,13 @@ function PANEL:Init()
 	
 	if (Clockwork.door:IsParent()) then
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("A parent is the main door in a property block.");
+			label:SetText("Le parent est la porte principale d'un bloc immobilier.");
 			label:SetInfoColor("blue");
 		self.settingsPanel:AddItem(label);
 	end;
 	
 	self.settingsPanel:AddItem(self.settingsForm);
-	self.textEntry = self.settingsForm:TextEntry("Text to show on the door.");
+	self.textEntry = self.settingsForm:TextEntry("Texte à afficher sur la porte.");
 	self.textEntry:SetAllowNonAsciiCharacters(true);
 	
 	-- Called when enter has been pressed.
@@ -66,38 +66,38 @@ function PANEL:Init()
 	
 	if (Clockwork.door:GetOwner() == Clockwork.Client) then
 		if (Clockwork.door:IsParent()) then
-			self.comboBox = self.settingsForm:ComboBox("What parent access options to use.");
-			self.comboBox:AddChoice("Share access to all children.");
-			self.comboBox:AddChoice("Seperate access between children.");
+			self.comboBox = self.settingsForm:ComboBox("Quelles options d’accès parental utiliser.");
+			self.comboBox:AddChoice("Partager l'accès à tous les enfants.");
+			self.comboBox:AddChoice("Accès séparé entre les enfants.");
 			
 			if (Clockwork.door:HasSharedAccess()) then
-				self.comboBox:SetText("Share access to all children.");
+				self.comboBox:SetText("Partager l'accès à tous les enfants.");
 			else
-				self.comboBox:SetText("Seperate access between children.");
+				self.comboBox:SetText("Accès séparé entre les enfants.");
 			end;
 			
 			-- Called when an option is selected.
 			self.comboBox.OnSelect = function(multiChoice, index, value, data)
-				if (value == "Share access to all children.") then
+				if (value == "Partager l'accès à tous les enfants.") then
 					netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Share"});
 				else
 					netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Unshare"});
 				end;
 			end;
 			
-			self.parentText = self.settingsForm:ComboBox("What parent text options to use.");
-			self.parentText:AddChoice("Share text to all children.");
-			self.parentText:AddChoice("Seperate text between children.");
+			self.parentText = self.settingsForm:ComboBox("Quelles options de texte parent utiliser.");
+			self.parentText:AddChoice("Partagez le texte avec tous les enfants.");
+			self.parentText:AddChoice("Séparer le texte entre les enfants.");
 			
 			if (Clockwork.door:HasSharedText()) then
-				self.parentText:SetText("Share text to all children.");
+				self.parentText:SetText("Partager le texte avec tous les enfants.");
 			else
-				self.parentText:SetText("Seperate text between children.");
+				self.parentText:SetText("Séparer le texte entre les enfants.");
 			end;
 			
 			-- Called when an option is selected.
 			self.parentText.OnSelect = function(multiChoice, index, value, data)
-				if (value == "Share text to all children.") then
+				if (value == "Partager le texte avec tous les enfants.") then
 					netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Share", "Text"});
 				else
 					netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Unshare", "Text"});
@@ -107,28 +107,28 @@ function PANEL:Init()
 		
 		if (!Clockwork.door:IsUnsellable()) then
 			local doorCost = Clockwork.config:Get("door_cost"):Get();
-			local doorText = "Sell";
+			local doorText = "Vendre";
 			local button = nil;
 			
 			if (doorCost > 0) then
-				button = self.settingsForm:Button("Sell");
+				button = self.settingsForm:Button("Vendre");
 			else
-				button = self.settingsForm:Button("Unown");
+				button = self.settingsForm:Button("Sans nom");
 			end;
 			
 			-- Called when the button is clicked.
 			function button.DoClick(button)
 				if (doorCost > 0) then
-					Derma_Query("Are you sure that you want to sell this door?", "Sell the door.", "Yes", function()
+					Derma_Query("Etes-vous sûr de vouloir vendre cette porte?", "Vendre la porte.", "Oui", function()
 						netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Sell"});
 						
 						gui.EnableScreenClicker(false);
 						self:Close(); self:Remove();
-					end, "No", function()
+					end, "Non", function()
 						gui.EnableScreenClicker(false);
 					end);
 				else
-					Derma_Query("Are you sure that you want to unown this door?", "Unown the door.", "Yes", function()
+					Derma_Query("Etes-vous sûr de vouloir supprimer cette porte ?", "Dépossédez la porte.", "Oui", function()
 						netstream.Start("DoorManagement", {Clockwork.door:GetEntity(), "Sell"});
 						
 						gui.EnableScreenClicker(false);
@@ -257,13 +257,13 @@ function PANEL:Rebuild()
 			collapsibleCategory:SetContents(panelList);
 			
 			if (k == 1) then
-				collapsibleCategory:SetLabel("Characters with complete access.");
+				collapsibleCategory:SetLabel("Personnages avec accès complet.");
 				collapsibleCategory:SetCookieName("cwDoorComplete");
 			elseif (k == 2) then
-				collapsibleCategory:SetLabel("Characters with basic access.");
+				collapsibleCategory:SetLabel("Personnages avec accès de base.");
 				collapsibleCategory:SetCookieName("cwDoorBasic");
 			else
-				collapsibleCategory:SetLabel("Characters with no access.");
+				collapsibleCategory:SetLabel("Personnages sans accès.");
 				collapsibleCategory:SetCookieName("cwDoorZero");
 			end;
 		end;
@@ -298,19 +298,19 @@ netstream.Hook("PurchaseDoor", function(data)
 	local doorCost = Clockwork.config:Get("door_cost"):Get();
 	
 	if (doorCost > 0) then
-		Derma_Query("Do you want to purchase this door for "..Clockwork.kernel:FormatCash(Clockwork.config:Get("door_cost"):Get(), nil, true).."?", "Purchase this door.", "Yes", function()
+		Derma_Query("Voulez-vous acheter cette porte pour "..Clockwork.kernel:FormatCash(Clockwork.config:Get("door_cost"):Get(), nil, true).."?", "Acheter cette porte.", "Oui", function()
 			netstream.Start("DoorManagement", {data, "Purchase"});
 			
 			gui.EnableScreenClicker(false);
-		end, "No", function()
+		end, "Non", function()
 			gui.EnableScreenClicker(false);
 		end);
 	else
-		Derma_Query("Do you want to own this door?", "Own this door.", "Yes", function()
+		Derma_Query("Voulez-vous posséder cette porte?", "Possédez cette porte.", "Oui", function()
 			netstream.Start("DoorManagement", {data, "Purchase"});
 			
 			gui.EnableScreenClicker(false);
-		end, "No", function()
+		end, "Non", function()
 			gui.EnableScreenClicker(false);
 		end);
 	end;

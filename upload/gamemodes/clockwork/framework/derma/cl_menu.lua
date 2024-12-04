@@ -132,7 +132,7 @@ function PANEL:Rebuild(change)
 		
 		self.characterMenu = vgui.Create("cwLabelButton", self);
 		self.characterMenu:SetFont(Clockwork.option:GetFont("menu_text_tiny"));
-		self.characterMenu:SetText("Victims");
+		self.characterMenu:SetText("Victimes");
 		self.characterMenu:SetCallback(function(button)
 			self:SetOpen(false);
 			Clockwork.character:SetPanelOpen(true);
@@ -149,7 +149,7 @@ function PANEL:Rebuild(change)
 			self:SetPos((((scrW - width / 2) - 256) + width / 2) - (math.cos((PentR - 200) / 57.5) * 232) + 232, ((scrH - height / 2) + imageHeight * 0.125) + (math.sin((PentR - 200) / 57.5) * 232) - (imageHeight * 0.125));
 
 			if (self:GetHovered()) then
-				local texts = {"VICTIMS", "vIcTiMs", "ViCtImS"};
+				local texts = {"VICTIMES", "vIcTiMes", "ViCtImES"};
 				
 				for i = 1, math.random(2, 4) do
 					surface.DrawRotatedText(table.Random(texts), table.Random(fonts), math.random(-20, 20), math.random(-20, 20), math.random(-5, 5), Color(170, 0, 0))
@@ -163,7 +163,7 @@ function PANEL:Rebuild(change)
 		
 		self.ritualsmenu = vgui.Create("cwLabelButton", self);
 		self.ritualsmenu:SetFont(Clockwork.option:GetFont("menu_text_tiny"));
-		self.ritualsmenu:SetText("Rituals");
+		self.ritualsmenu:SetText("Rituels");
 		self.ritualsmenu:SetCallback(function(button)
 			if cwRituals then
 				if !Clockwork.Client.cwRitualsMenu or !IsValid(Clockwork.Client.cwRitualsMenu) then
@@ -186,7 +186,7 @@ function PANEL:Rebuild(change)
 			self:SetPos((((scrW - width / 2) - 256) + width / 2) - (math.cos((PentR - 128) / 57.5) * 232) + 192, ((scrH - height / 2) + imageHeight * 0.125) + (math.sin((PentR - 128) / 57.5) * 232) - (imageHeight * 0.125));
 			
 			if (self:GetHovered()) then
-				local texts = {"RITUALS", "rItUaLs", "RiTuAlS"};
+				local texts = {"RITUeLS", "rItUELs", "RiTuelS"};
 				
 				for i = 1, math.random(2, 4) do
 					surface.DrawRotatedText(table.Random(texts), table.Random(fonts), math.random(-20, 20), math.random(-20, 20), math.random(-5, 5), Color(170, 0, 0))
@@ -200,7 +200,7 @@ function PANEL:Rebuild(change)
 		
 		self.craftingmenu = vgui.Create("cwLabelButton", self);
 		self.craftingmenu:SetFont(Clockwork.option:GetFont("menu_text_tiny"));
-		self.craftingmenu:SetText("Crafting");
+		self.craftingmenu:SetText("Fabrication");
 		self.craftingmenu:SetCallback(function(button)
 			if cwRecipes then
 				if Clockwork.player:GetAction(Clockwork.Client) == "crafting" then
@@ -227,7 +227,7 @@ function PANEL:Rebuild(change)
 			self:SetPos((((scrW - width / 2) - 256) + width / 2) - (math.cos((PentR + 88) / 57.5) * 232) + 232, ((scrH - height / 2) + imageHeight * 0.125) + (math.sin((PentR + 88) / 57.5) * 232) - (imageHeight * 0.125));
 			
 			if (self:GetHovered()) then
-				local texts = {"CRAFTING", "cRaFtInG", "CrAfTiNg"};
+				local texts = {"FABRICATION", "FaBrIcAtIon", "fAbriCatIon"};
 				
 				for i = 1, math.random(2, 4) do
 					surface.DrawRotatedText(table.Random(texts), table.Random(fonts), math.random(-20, 20), math.random(-20, 20), math.random(-5, 5), Color(170, 0, 0))
@@ -241,7 +241,7 @@ function PANEL:Rebuild(change)
 		
 		self.beliefsmenu = vgui.Create("cwLabelButton", self);
 		self.beliefsmenu:SetFont(Clockwork.option:GetFont("menu_text_tiny"));
-		self.beliefsmenu:SetText("Beliefs");
+		self.beliefsmenu:SetText("Croyances");
 		self.beliefsmenu:SetCallback(function(button)
 			if cwBeliefs then
 				cwBeliefs:OpenTree();
@@ -260,7 +260,7 @@ function PANEL:Rebuild(change)
 			self:SetPos((((scrW - width / 2) - 256) + width / 2) - (math.cos((PentR - 56) / 57.5) * 232) + 232, ((scrH - height / 2) + imageHeight * 0.125) + (math.sin((PentR - 56) / 57.5) * 232) - (imageHeight * 0.125));
 			
 			if (self:GetHovered()) then
-				local texts = {"BELIEFS", "bElIeFs", "BeLiEfS"};
+				local texts = {"CROYANCES", "CrOyAnCe", "cRoYance"};
 				
 				for i = 1, math.random(2, 4) do
 					surface.DrawRotatedText(table.Random(texts), table.Random(fonts), math.random(-20, 20), math.random(-20, 20), math.random(-5, 5), Color(170, 0, 0))
@@ -292,7 +292,7 @@ function PANEL:Rebuild(change)
 			self.adminlabel = vgui.Create("cwLabelButton", self);
 			self.adminlabel:NoClipping(true);
 			self.adminlabel:SetFont(Clockwork.option:GetFont("menu_text_tiny"));
-			self.adminlabel:SetText(string.upper("[ADMIN OPTIONS]"));
+			self.adminlabel:SetText(string.upper("[OPTIONS D'ADMINISTRATION]"));
 			self.adminlabel:SizeToContents();
 			self.adminlabel:SetMouseInputEnabled(false);
 			self.adminlabel:SetPos(x, y);

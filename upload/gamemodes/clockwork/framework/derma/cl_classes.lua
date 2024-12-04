@@ -67,7 +67,7 @@ function PANEL:Rebuild()
 	
 	if (#classes > 0) then
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("Classes you choose do not stay with your character.");
+			label:SetText("Les classes que vous choisissez ne restent pas avec votre personnage.");
 			label:SetInfoColor("blue");
 		self.panelList:AddItem(label);
 		
@@ -81,7 +81,7 @@ function PANEL:Rebuild()
 		end;
 	else
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("You do not have access to any classes!");
+			label:SetText("Vous n'avez accès à aucun cours !");
 			label:SetInfoColor("red");
 		self.panelList:AddItem(label);
 	end;
@@ -158,7 +158,7 @@ function PANEL:Init()
 	if (self.overrideData.information) then
 		self.information:SetText(self.overrideData.information);
 	else
-		self.information:SetText("There are "..players.."/"..limit.." characters with this class.");
+		self.information:SetText("Il y a "..players.."/"..limit.." personnages avec cette classe.");
 	end;
 	
 	self.information:SetDark(true);
@@ -197,7 +197,7 @@ end;
 -- Called each frame.
 function PANEL:Think()
 	if (self.classTable and !self.overrideData.information) then
-		self.information:SetText("There are ".._team.NumPlayers(self.classTable.index).."/"..Clockwork.class:GetLimit(self.classTable.name).." characters with this class.");
+		self.information:SetText("Il y a ".._team.NumPlayers(self.classTable.index).."/"..Clockwork.class:GetLimit(self.classTable.name).." personnages avec cette classe.");
 		self.information:SizeToContents();
 	end;
 	

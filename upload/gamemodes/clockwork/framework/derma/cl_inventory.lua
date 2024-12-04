@@ -377,7 +377,7 @@ function PANEL:Rebuild()
 					
 					-- Handler for item with unsupported category being equipped.
 					if !self.categoryLocations[category] then
-						ErrorNoHalt(v2.uniqueID.." with category "..category.." was not able to be equipped!");
+						ErrorNoHalt(v2.uniqueID.." avec catégorie "..category.." n'a pas pu être équipé!");
 						
 						continue;
 					end

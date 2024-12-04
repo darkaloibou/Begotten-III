@@ -176,7 +176,7 @@ function PANEL:Rebuild()
 		end;
 	else
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("You do not have access to any settings!");
+			label:SetText("Vous n'avez accès à aucun paramètre!");
 			label:SetInfoColor("red");
 		self.panelList:AddItem(label);
 	end;
