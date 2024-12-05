@@ -18,7 +18,7 @@ function ENT:HUDPaintTargetID(x, y, alpha)
 	end
 
 	y = Clockwork.kernel:DrawInfo(name, x, y, colorTargetID, alpha)
-	y = Clockwork.kernel:DrawInfo("There might be something inside.", x, y, colorWhite, alpha)
+	y = Clockwork.kernel:DrawInfo("Il pourrait y avoir quelque chose à l'intérieur.", x, y, colorWhite, alpha)
 end
 
 -- Called when the entity should draw.

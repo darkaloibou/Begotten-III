@@ -200,16 +200,16 @@ end)
 
 netstream.Hook("RecogniseMenu", function(data)
 	local menuPanel = Clockwork.kernel:AddMenuFromData(nil, {
-		["All characters within whispering range."] = function()
+		["Tous les personnages à portée de chuchotement."] = function()
 			netstream.Start("RecogniseOption", "whisper")
 		end,
-		["All characters within yelling range."] = function()
+		["Tous les personnages à portée de cri."] = function()
 			netstream.Start("RecogniseOption", "yell")
 		end,
-		["All characters within talking range."] = function()
+		["Tous les personnages à portée de conversation."] = function()
 			netstream.Start("RecogniseOption", "talk")
 		end,
-		["The character you are looking at."] = function()
+		["Le personnage que vous regardez."] = function()
 			netstream.Start("RecogniseOption", "look")
 		end
 	})
@@ -277,7 +277,7 @@ netstream.Hook("ReloadMenu", function(data)
 		end
 	end
 	
-	Schema:EasyText("chocolate", "No valid ammo could be found for this weapon!");
+	Schema:EasyText("chocolate", "Aucune munition valide n'a pu être trouvée pour cette arme!");
 end)
 
 netstream.Hook("ClockworkIntro", function(data)

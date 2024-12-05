@@ -28,9 +28,9 @@ if (SERVER) then
 end
 
 if (CLIENT) then
-	SWEP.PrintName			= "Hands"
-	SWEP.Instructions		= "Primary Fire: Hit.\nSecondary Fire: Knock on a door.\nR: Drop an item."
-	SWEP.Purpose			= "Harming characters and knocking on doors."
+	SWEP.PrintName			= "Mains"
+	SWEP.Instructions		= "Feu primaire: Frapper.\nTir secondaire : frapper à une porte.\nR: Déposer un objet."
+	SWEP.Purpose			= "Nuire aux personnages et frapper aux portes."
 	SWEP.Author 			= "Cloud Sixteen"
 	SWEP.Contact			= "Cloudsixteen.com"
 

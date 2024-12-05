@@ -38,7 +38,7 @@ netstream.Hook("EntityMenuOption", function(player, data)
 
 					player.nextEntityHandle = curTime + config.Get("entity_handle_time"):Get()
 				else
-					Schema:EasyText(player, "grey", "You cannot use another entity that fast!")
+					Schema:EasyText(player, "grey", "Vous ne pouvez pas utiliser une autre entité aussi rapidement!")
 				end
 			end
 		end
@@ -103,7 +103,7 @@ netstream.Hook("InteractCharacter", function(player, data)
 			local fault = hook.Run("PlayerCanInteractCharacter", player, action, character)
 
 			if (fault == false or type(fault) == "string") then
-				return Clockwork.player:SetCreateFault(player, fault or "You cannot interact with this character!")
+				return Clockwork.player:SetCreateFault(player, fault or "Vous ne pouvez pas interagir avec ce personnage!")
 			elseif (action == "delete") then
 				local bSuccess, fault = Clockwork.player:DeleteCharacter(player, characterID)
 
@@ -136,7 +136,7 @@ netstream.Hook("UnpermakillCharacter", function(player, data)
 			local character = target:GetCharacters()[characterID];
 
 			if (!character) then
-				Schema:EasyText(player, "grey", characterID.." is not a valid character!");
+				Schema:EasyText(player, "grey", characterID.." n'est pas un caractère valide!");
 				return 
 			end
 			

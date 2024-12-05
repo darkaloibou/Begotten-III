@@ -154,15 +154,15 @@ function GM:GetEntityMenuOptions(entity, options)
 				itemTable:GetEntityMenuOptions(entity, options)
 			end
 
-			options["Take"] = "cwItemTake"
-			options["Examine"] = "cwItemExamine"
+			options["Prendre"] = "cwItemTake"
+			options["Examiner"] = "cwItemExamine"
 		end
 	elseif (class == "cw_belongings") then
-		options["Open"] = "cwBelongingsOpen"
+		options["Ouvrir"] = "cwBelongingsOpen"
 	elseif (class == "cw_shipment") then
-		options["Open"] = "cwShipmentOpen"
+		options["Ouvrir"] = "cwShipmentOpen"
 	elseif (class == "cw_cash") then
-		options["Take"] = "cwCashTake"
+		options["Prendre"] = "cwCashTake"
 	end
 end
 
@@ -366,10 +366,10 @@ function GM:ClockworkInitialized()
 
 	Clockwork.setting:AddSettings()
 
-	Clockwork.directory:SetCategoryTip("Admin", "Contains admin relevant information. Does not show to players.")
-	Clockwork.directory:SetCategoryTip("Admin Commands", "Contains a list of admin commands and their syntax.")
-	Clockwork.directory:SetCategoryTip("Flags", "Contains a list of character flags and their usage.")
-	Clockwork.directory:SetCategoryTip("Commands", "Contains a list of commands and their syntax.")
+	Clockwork.directory:SetCategoryTip("Admin", "Contient des informations pertinentes pour l'administrateur. Ne s'affiche pas pour les joueurs.")
+	Clockwork.directory:SetCategoryTip("Admin Commands", "Contient une liste de commandes d'administration et leur syntaxe.")
+	Clockwork.directory:SetCategoryTip("Flags", "Contient une liste d'indicateurs de caractères et leur utilisation.")
+	Clockwork.directory:SetCategoryTip("Commands", "Contient une liste de commandes et leur syntaxe.")
 
 	Clockwork.directory:AddCode("Admin", [[
 		
@@ -735,10 +735,10 @@ function GM:MenuItemsAdd(menuItems)
 	local directoryName = Clockwork.option:GetKey("name_directory")
 	--local inventoryName = Clockwork.option:GetKey("name_inventory")
 
-	menuItems:Add("Inventory", "cwInventory", "Manage your inventory.")
-	menuItems:Add("Settings", "cwSettings", "Configure the way CW works for you.")
-	menuItems:Add("System", "cwSystem", "Customize server settings.")
-	menuItems:Add("Scoreboard", "cwScoreboard", "See who's playing on the server.")
+	menuItems:Add("Inventory", "cwInventory", "Gérez votre inventaire.")
+	menuItems:Add("Settings", "cwSettings", "Configurez la manière dont CW fonctionne pour vous.")
+	menuItems:Add("System", "cwSystem", "Personnaliser les paramètres du serveur.")
+	menuItems:Add("Scoreboard", "cwScoreboard", "Voyez qui joue sur le serveur.")
 	menuItems:Add(directoryName, "cwDirectory", Clockwork.option:GetKey("description_directory"))
 	--menuItems:Add("Crafting", "DPanel", "Craft.", nil, nil)
 	--menuItems:Add("Rituals", "DPanel", "Do some twisted shit.", nil, nil)
@@ -1027,7 +1027,7 @@ function GM:HUDPaintForeground()
 
 	if (LocalPlayer().ErrorBoxTime and LocalPlayer().ErrorBoxTime > (curTime)) then
 		draw.RoundedBox(2, scrW - 300, 8, 292, 24, Color(math.Clamp(255 * (math.sin(curTime)), 150, 255), 90, 90))
-		draw.SimpleText("Something is creating hook errors!", Clockwork.fonts:GetSize(Clockwork.option:GetFont("menu_text_small"), 18), scrW - 292, 10, Color(255, 255, 255))
+		draw.SimpleText("Quelque chose crée des erreurs de hook!", Clockwork.fonts:GetSize(Clockwork.option:GetFont("menu_text_small"), 18), scrW - 292, 10, Color(255, 255, 255))
 	end
 
 	if (info) then
@@ -2474,7 +2474,7 @@ function GM:HUDDrawTargetID()
 									end
 									
 									y = Clockwork.plugin:Call("DrawTargetPlayerStatus", player, alpha, x, y) or y
-									y = Clockwork.kernel:DrawInfo("Press <X> to inspect this character.", x, y, colorWhite, alpha)
+									y = Clockwork.kernel:DrawInfo("Appuyez sur <X> pour inspecter ce caractère.", x, y, colorWhite, alpha)
 								end
 								
 								--[[if (!Clockwork.nextCheckRecognises or curTime >= Clockwork.nextCheckRecognises[1] or Clockwork.nextCheckRecognises[2] != player) then
@@ -2544,7 +2544,7 @@ function GM:DrawTargetPlayerStatus(target, alpha, x, y)
 	end
 
 	if (!target:Alive()) then
-		return Clockwork.kernel:DrawInfo(gender.." is clearly deceased.", x, y, informationColor, alpha)
+		return Clockwork.kernel:DrawInfo(gender.." est clairement décédé.", x, y, informationColor, alpha)
 	else
 		return y
 	end
@@ -2555,7 +2555,7 @@ function GM:GetCharacterPanelToolTip(panel, character)
 	if (table.Count(Clockwork.faction:GetAll()) > 1) then
 		local numPlayers = #Clockwork.faction:GetPlayers(character.faction)
 		local numLimit = Clockwork.faction:GetLimit(character.faction)
-		return "There are "..numPlayers.."/"..numLimit.." characters with this faction."
+		return "There are "..numPlayers.."/"..numLimit.." personnages avec cette faction."
 	end
 end
 
@@ -2613,9 +2613,9 @@ function GM:GetProgressBarInfo()
 		if ragdolled then
 			if (action == "unragdoll") then
 				if (Clockwork.Client:GetRagdollState() == RAGDOLL_FALLENOVER) then
-					return {text = "You are regaining stability.", percentage = percentage, flash = percentage < 10}
+					return {text = "Vous retrouvez la stabilité.", percentage = percentage, flash = percentage < 10}
 				else
-					return {text = "You are regaining conciousness.", percentage = percentage, flash = percentage < 10}
+					return {text = "Vous reprenez conscience.", percentage = percentage, flash = percentage < 10}
 				end
 			else
 				local info = hook.Run("GetProgressBarInfoAction", action, percentage);
@@ -2623,7 +2623,7 @@ function GM:GetProgressBarInfo()
 				if info then return info end;
 			
 				if (action != "unragdoll" and hook.Run("PlayerCanGetUp", action)) then
-					return {text = "Press 'jump' to get up.", percentage = 100}
+					return {text = "Appuyez sur « sauter » pour vous lever.", percentage = 100}
 				end
 			end
 		elseif action then
@@ -2632,12 +2632,12 @@ function GM:GetProgressBarInfo()
 			if info then return info end;
 			
 			if (action == "lock") then
-				return {text = "The door is being locked.", percentage = percentage, flash = percentage < 10}
+				return {text = "La porte est verrouillée.", percentage = percentage, flash = percentage < 10}
 			elseif (action == "unlock") then
-				return {text = "The door is being unlocked.", percentage = percentage, flash = percentage < 10}
+				return {text = "La porte est en train d'être déverrouillée.", percentage = percentage, flash = percentage < 10}
 			end;
 			
-			return {text = "You are performing an action.", percentage = percentage};
+			return {text = "Vous effectuez une action.", percentage = percentage};
 		end;
 	end;
 end
@@ -2680,11 +2680,11 @@ function GM:GetPlayerInfoText(playerInfoText)
 
 	if (config.Get("cash_enabled"):Get()) then
 		if (cash > 0) then
-			playerInfoText:Add("CASH", Clockwork.option:GetKey("name_cash")..": "..Clockwork.kernel:FormatCash(cash, true))
+			playerInfoText:Add("ESPÈCES", Clockwork.option:GetKey("name_cash")..": "..Clockwork.kernel:FormatCash(cash, true))
 		end
 
 		if (wages > 0) then
-			playerInfoText:Add("WAGES", Clockwork.Client:GetWagesName()..": "..Clockwork.kernel:FormatCash(wages))
+			playerInfoText:Add("SALAIRES", Clockwork.Client:GetWagesName()..": "..Clockwork.kernel:FormatCash(wages))
 		end
 	end
 
@@ -2737,7 +2737,7 @@ function GM:GetTargetPlayerText(player, targetPlayerText)
 			end
 		end;
 	elseif (player:Alive()) then
-		targetPlayerText:Add("PHYSDESC", "You do not recognize "..thirdPerson..".")
+		targetPlayerText:Add("PHYSDESC", "Tu ne reconnais pas "..thirdPerson..".")
 	end
 end
 
@@ -2761,7 +2761,7 @@ function GM:GetPlayerScoreboardText(player)
 			return physDesc
 		end
 	else
-		return "You do not recognize "..thirdPerson..".";
+		return "Tu ne reconnais pas "..thirdPerson..".";
 	end
 end
 
@@ -2820,7 +2820,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (plyKick and Clockwork.player:HasFlags(Clockwork.Client, plyKick.access)) then
 		options["Kick Player"] = function()
-			Derma_StringRequest(player:Name(), "What is your reason for kicking them?", nil, function(text)
+			Derma_StringRequest(player:Name(), "Quelle est la raison pour laquelle tu les as expulsés ??", nil, function(text)
 				Clockwork.kernel:RunCommand("PlyKick", player:Name(), text)
 			end)
 		end
@@ -2828,8 +2828,8 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (plyBan and Clockwork.player:HasFlags(Clockwork.Client, Clockwork.command:FindByID("PlyBan").access)) then
 		options["Ban Player"] = function()
-			Derma_StringRequest(player:Name(), "How many minutes would you like to ban them for?", nil, function(minutes)
-				Derma_StringRequest(player:Name(), "What is your reason for banning them?", nil, function(reason)
+			Derma_StringRequest(player:Name(), "Pendant combien de minutes souhaitez-vous les bannir ?", nil, function(minutes)
+				Derma_StringRequest(player:Name(), "Quelle est la raison pour laquelle vous les interdisez ?", nil, function(reason)
 					Clockwork.kernel:RunCommand("PlyBan", player:Name(), minutes, reason)
 				end)
 			end)
@@ -2856,7 +2856,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (charGiveFlags and Clockwork.player:HasFlags(Clockwork.Client, charGiveFlags.access)) then
 		options["Give Flags"] = function()
-			Derma_StringRequest(player:Name(), "What flags would you like to give them?", nil, function(text)
+			Derma_StringRequest(player:Name(), "Quels drapeaux aimeriez-vous leur donner?", nil, function(text)
 				Clockwork.kernel:RunCommand("CharGiveFlags", player:Name(), text)
 			end)
 		end
@@ -2864,7 +2864,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (charTakeFlags and Clockwork.player:HasFlags(Clockwork.Client,charTakeFlags.access)) then
 		options["Take Flags"] = function()
-			Derma_StringRequest(player:Name(), "What flags would you like to take from them?", player:GetDTString(STRING_FLAGS), function(text)
+			Derma_StringRequest(player:Name(), "Quels drapeaux aimeriez-vous leur prendre ??", player:GetDTString(STRING_FLAGS), function(text)
 				Clockwork.kernel:RunCommand("CharTakeFlags", player:Name(), text)
 			end)
 		end
@@ -2872,7 +2872,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (charSetName and Clockwork.player:HasFlags(Clockwork.Client, charSetName.access)) then
 		options["Set Name"] = function()
-			Derma_StringRequest(player:Name(), "What would you like to set their name to?", player:Name(), function(text)
+			Derma_StringRequest(player:Name(), "Quel nom souhaitez-vous donner à leur nom ??", player:Name(), function(text)
 				Clockwork.kernel:RunCommand("CharSetName", player:Name(), text)
 			end)
 		end
@@ -2880,7 +2880,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 
 	if (charGiveItem and Clockwork.player:HasFlags(Clockwork.Client, charGiveItem.access)) then
 		options["Give Item"] = function()
-			Derma_StringRequest(player:Name(), "What item would you like to give them?", nil, function(text)
+			Derma_StringRequest(player:Name(), "Quel objet aimeriez-vous leur offrir ?", nil, function(text)
 				Clockwork.kernel:RunCommand("CharGiveItem", player:Name(), text)
 			end)
 		end
@@ -2913,7 +2913,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 	
 	if (CharSetSacramentLevel and Clockwork.player:HasFlags(Clockwork.Client, CharSetSacramentLevel.access)) then
 		options["Set Level"] = function()
-			Derma_StringRequest(player:Name(), "What level would you like to set them to? (Max: 30)", nil, function(level)
+			Derma_StringRequest(player:Name(), "À quel niveau souhaitez-vous les régler ? (Max : 30)", nil, function(level)
 				Clockwork.kernel:RunCommand("CharSetSacramentLevel", player:Name(), level)
 			end)
 		end
@@ -2921,7 +2921,7 @@ function GM:GetPlayerScoreboardOptions(player, options, menu)
 	
 	if (CharAddExperience and Clockwork.player:HasFlags(Clockwork.Client, CharAddExperience.access)) then
 		options["Add Faith (XP)"] = function()
-			Derma_StringRequest(player:Name(), "How much faith (xp) would you like to add?", nil, function(xp)
+			Derma_StringRequest(player:Name(), "Combien de foi (xp) souhaitez-vous ajouter ?", nil, function(xp)
 				Clockwork.kernel:RunCommand("CharAddExperience", player:Name(), xp)
 			end)
 		end
@@ -3289,7 +3289,7 @@ function GM:ShouldPlayerScreenFadeBlack()
 			draw.RoundedBox(0, 0, 0, scrW, scrH, Color(0, 0, 0, 255));
 			
 			if !Clockwork.Client:Alive() then
-				draw.SimpleText("You have been corpsed.", introTextSmallFont, scrW / 2, scrH / 2, Color(170, 0, 0, 255), 1, 1);
+				draw.SimpleText("Tu as été cadavre.", introTextSmallFont, scrW / 2, scrH / 2, Color(170, 0, 0, 255), 1, 1);
 			end
 		
 			return true;
@@ -3361,7 +3361,7 @@ function GM:HUDDrawScoreBoard()
 		draw.RoundedBox(0, 0, 0, ScrW(), ScrH(), Color(0, 0, 0, 255));
 		
 		if (!_file.Exists("papapete.txt", "DATA")) then
-			_file.Write("papapete.txt", "pop open a fresh cold pop straight from the cooler");
+			_file.Write("papapete.txt", "ouvrez une boisson glacée fraîche directement de la glacière");
 			Clockwork.Client.EpilepsyWarning = true;
 		end;
 		

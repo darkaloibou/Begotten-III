@@ -38,7 +38,7 @@ function PANEL:Rebuild()
 		self.panelList:AddItem(self.navigationForm);
 	
 		local backButton = vgui.Create("DButton", self);
-			backButton:SetText("Back to Navigation");
+			backButton:SetText("retour à la navigation");
 			backButton:SetWide(self:GetParent():GetWide());
 			
 			-- Called when the button is clicked.
@@ -62,7 +62,7 @@ function PANEL:Rebuild()
 		end;
 	else
 		local label = vgui.Create("cwInfoText", self);
-			label:SetText("The "..Clockwork.option:GetKey("name_system").." provides you with various tools.");
+			label:SetText("The "..Clockwork.option:GetKey("name_system").." vous fournit divers outils.");
 			label:SetInfoColor("blue");
 		self.panelList:AddItem(label);
 		
@@ -74,7 +74,7 @@ function PANEL:Rebuild()
 				if (v:HasAccess()) then
 					systemButton:SetButton(true);
 					systemButton:SetInfoColor("green");
-					systemButton:SetToolTip("Click here to open this System panel.");
+					systemButton:SetToolTip("Cliquez ici pour ouvrir ce panneau système.");
 					
 					-- Called when the button is clicked.
 					function systemButton.DoClick(button)
@@ -83,7 +83,7 @@ function PANEL:Rebuild()
 					end;
 				else
 					systemButton:SetInfoColor("red");
-					systemButton:SetToolTip("You do not have access to this System panel.");
+					systemButton:SetToolTip("Vous n'avez pas accès à ce panneau système.");
 				end;
 				
 				systemButton:SetShowIcon(false);
