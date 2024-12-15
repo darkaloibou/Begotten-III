@@ -65,7 +65,7 @@ CLASS_TABLE.space = 1;
 CLASS_TABLE.itemID = 0;
 CLASS_TABLE.business = false;
 CLASS_TABLE.category = "Other";
-CLASS_TABLE.description = "An item with no description.";
+CLASS_TABLE.description = "Un article sans description.";
 CLASS_TABLE.defaultValue = 10;
 
 CLASS_TABLE.itemWeaponClass = "a_defaultweapon";
@@ -670,7 +670,7 @@ if (SERVER) then
 				self.OnRepaired(player, itemTable, amount, degradation);
 			end;
 		elseif (holder) then
-			Schema:EasyText(holder, "peru", "You cannot repair this item!");
+			Schema:EasyText(holder, "peru", "Vous ne pouvez pas réparer cet article!");
 		end;
 	end;
 	
@@ -718,10 +718,10 @@ if (SERVER) then
 		
 		if (self("batch") > 1) then
 			Clockwork.player:GiveCash(player, -(self("cost") * self("batch")), self("batch").." "..Clockwork.kernel:Pluralize(self("name")));
-			Clockwork.kernel:PrintLog(LOGTYPE_MINOR, player:Name().." has ordered "..self("batch").." "..Clockwork.kernel:Pluralize(self("name"))..".");
+			Clockwork.kernel:PrintLog(LOGTYPE_MINOR, player:Name().." a commandé "..self("batch").." "..Clockwork.kernel:Pluralize(self("name"))..".");
 		else
 			Clockwork.player:GiveCash(player, -(self("cost") * self("batch")), self("batch").." "..self("name"));
-			Clockwork.kernel:PrintLog(LOGTYPE_MINOR, player:Name().." has ordered "..self("batch").." "..self("name")..".");
+			Clockwork.kernel:PrintLog(LOGTYPE_MINOR, player:Name().." a commandé "..self("batch").." "..self("name")..".");
 		end;
 	end;
 	

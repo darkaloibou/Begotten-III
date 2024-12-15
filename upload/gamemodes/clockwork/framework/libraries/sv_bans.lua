@@ -95,7 +95,7 @@ function Clockwork.bans:Add(identifier, duration, reason, Callback, bSaveless)
 	end
 
 	if (!reason) then
-		reason = "Banned for an unspecified reason."
+		reason = "Interdit pour une raison non précisée."
 	end
 
 	if (steamName) then

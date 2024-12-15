@@ -20,13 +20,13 @@ function Clockwork.icon:Add(uniqueID, path, callback, bIsPlayer)
 					isPlayer = bIsPlayer
 				}
 			else
-				MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Error: Attempting to add icon without providing a callback.\n")
+				MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Erreur : tentative d'ajout d'une icône sans fournir de rappel.\n")
 			end
 		else
-			MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Error: Attempting to add icon without providing a path..\n")
+			MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Erreur : tentative d'ajout d'une icône sans fournir de chemin..\n")
 		end
 	else
-		MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Error: Attempting to add an icon without providing a uniqueID.\n")
+		MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Erreur : tentative d'ajout d'une icône sans fournir d'ID unique.\n")
 	end
 end
 
@@ -35,7 +35,7 @@ function Clockwork.icon:Remove(uniqueID)
 	if (uniqueID) then
 		self.stored[uniqueID] = nil
 	else
-		MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Error: Attempting to remove an icon without providing a uniqueID.\n")
+		MsgC(Color(255, 100, 0, 255), "[Clockwork:Icon] Erreur : tentative de suppression d'une icône sans fournir d'ID unique.\n")
 	end
 end
 

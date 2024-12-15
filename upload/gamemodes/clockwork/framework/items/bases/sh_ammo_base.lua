@@ -7,7 +7,7 @@
 
 local ITEM = item.New(nil, true);
 	ITEM.name = "Ammo Base"
-	ITEM.useText = "Load"
+	ITEM.useText = "Charger"
 	ITEM.useSound = false
 	ITEM.category = "Ammunition"
 	ITEM.ammoClass = "pistol"

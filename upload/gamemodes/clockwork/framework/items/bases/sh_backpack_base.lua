@@ -6,9 +6,9 @@ ITEM.uniqueID = "backpack_base";
 ITEM.model = "models/props_c17/suitcase_passenger_physics.mdl";
 ITEM.weight = 2; -- The real, actual weight of the item (as opposed to the perceived weight)
 ITEM.invSpace = 4; -- The amount of additional space this item gives when equipped
-ITEM.useText = "Equip";
+ITEM.useText = "Équiper";
 ITEM.category = "Backpacks";
-ITEM.description = "A nice black backpack that can hold stuff.";
+ITEM.description = "Un joli sac à dos noir qui peut contenir des affaires.";
 ITEM.excludeFactions = {};
 ITEM.requireFaction = {};
 ITEM.requireSubfaction = {};
@@ -58,7 +58,7 @@ end
 function ITEM:OnDrop(player, position)
 	if (self:HasPlayerEquipped(player)) then
 		if !player.spawning then
-			Schema:EasyText(player, "peru", "You cannot drop an item you're currently wearing.")
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas laisser tomber un article que vous portez actuellement.")
 		end
 		
 		return false
@@ -74,7 +74,7 @@ function ITEM:OnUse(player, itemEntity)
 
 	if (self:HasPlayerEquipped(player)) then
 		if !player.spawning then
-			Schema:EasyText(player, "peru", "You cannot equip an item you're already using.")
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas équiper un objet que vous utilisez déjà.")
 		end
 		
 		return false
@@ -82,7 +82,7 @@ function ITEM:OnUse(player, itemEntity)
 	
 	if (table.HasValue(self.excludeFactions, kinisgerOverride or faction)) then
 		if !player.spawning then
-			Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+			Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne faction pour porter cela!")
 		end
 			
 		return false
@@ -90,7 +90,7 @@ function ITEM:OnUse(player, itemEntity)
 	
 	if (table.HasValue(self.excludeSubfactions, kinisgerOverrideSubfaction or subfaction)) then
 		if !player.spawning then
-			Schema:EasyText(player, "peru", "Your subfaction cannot wear this!")
+			Schema:EasyText(player, "peru", "Votre sous-faction ne peut pas porter cela!")
 		end
 		
 		return false
@@ -99,7 +99,7 @@ function ITEM:OnUse(player, itemEntity)
 	if #self.requireFaith > 0 then
 		if (!table.HasValue(self.requireFaith, player:GetFaith())) then
 			if !player.spawning then
-				Schema:EasyText(player, "chocolate", "You are not the correct faith for this item!")
+				Schema:EasyText(player, "chocolate", "Vous n'êtes pas de la bonne foi pour cet article!")
 			end
 
 			return false
@@ -109,7 +109,7 @@ function ITEM:OnUse(player, itemEntity)
 	if #self.requireFaction > 0 then
 		if (!table.HasValue(self.requireFaction, faction) and (!kinisgerOverride or !table.HasValue(self.requireFaction, kinisgerOverride))) then
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+				Schema:EasyText(player, "peru", "Vous n’êtes pas la bonne faction pour porter ça !")
 			end
 			
 			return false
@@ -119,7 +119,7 @@ function ITEM:OnUse(player, itemEntity)
 	if #self.requireSubfaction > 0 then
 		if (!table.HasValue(self.requireSubfaction, subfaction) and (!kinisgerOverrideSubfaction or !table.HasValue(self.requireSubfaction, kinisgerOverrideSubfaction))) then
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You are not the correct subfaction to wear this!")
+				Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne sous-faction pour porter cela!")
 			end
 			
 			return false
@@ -131,7 +131,7 @@ function ITEM:OnUse(player, itemEntity)
 		
 		if backpack and backpack.uniqueID == self.uniqueID then
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You already have a backpack of this type equipped!")
+				Schema:EasyText(player, "peru", "Vous possédez déjà un sac à dos de ce type équipé!")
 			end
 			
 			return false
@@ -153,7 +153,7 @@ function ITEM:OnUse(player, itemEntity)
 		return true
 	else
 		if !player.spawning then
-			Schema:EasyText(player, "peru", "You cannot do this action at this moment.")
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas effectuer cette action pour le moment.")
 		end
 	end
 

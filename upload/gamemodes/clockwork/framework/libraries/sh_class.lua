@@ -243,7 +243,7 @@ if (SERVER) then
 
 			return true
 		else
-			return false, "This is not a valid class!"
+			return false, "Ce n'est pas une classe valide!"
 		end
 	end
 end

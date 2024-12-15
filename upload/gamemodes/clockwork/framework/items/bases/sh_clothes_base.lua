@@ -11,7 +11,7 @@ local ITEM = item.New(nil, true);
 	ITEM.weight = 2
 	ITEM.useText = "Wear"
 	ITEM.category = "Clothing"
-	ITEM.description = "A suitcase full of clothes."
+	ITEM.description = "Une valise pleine de vêtements."
 	--ITEM.equippable = false; -- this blocks equipping the item as a melee weapon.
 	ITEM.excludeFactions = {};
 	ITEM.requireFaction = {};
@@ -105,7 +105,7 @@ local ITEM = item.New(nil, true);
 					return false;
 				end
 			else
-				Clockwork.player:Notify(player, "You cannot drop the item that far away!");
+				Clockwork.player:Notify(player, "Vous ne pouvez pas laisser tomber l'objet aussi loin!");
 			end
 		end
 		
@@ -113,7 +113,7 @@ local ITEM = item.New(nil, true);
 			local action = Clockwork.player:GetAction(player);
 			
 			if action == "putting_on_armor" or action == "taking_off_armor" then
-				Schema:EasyText(player, "peru", "You cannot take this armor off while already putting on or taking off armor!");
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas retirer cette armure si vous avez déjà mis ou retiré une armure.!");
 				return false;
 			end
 		
@@ -172,7 +172,7 @@ local ITEM = item.New(nil, true);
 							end
 						end
 					else
-						Clockwork.player:Notify(player, "You cannot drop the item that far away!");
+						Clockwork.player:Notify(player, "Vous ne pouvez pas laisser tomber l'objet aussi loin!");
 					end
 				end
 				
@@ -263,40 +263,40 @@ local ITEM = item.New(nil, true);
 		local kinisgerOverrideSubfaction = player:GetNetVar("kinisgerOverrideSubfaction");
 		
 		if action == "putting_on_armor" or action == "taking_off_armor" then
-			Schema:EasyText(player, "peru", "You cannot wear this while already putting on or taking off armor!");
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas porter ceci alors que vous avez déjà mis ou enlevé une armure.!");
 			return false;
 		end
 	
 		if cwPowerArmor and player:IsWearingPowerArmor() then
-			Schema:EasyText(player, "peru", "You cannot wear this while in power armor!");
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas porter cela lorsque vous portez une armure assistée!");
 			return false;
 		end
 	
 		if self:IsBroken() then
-			Schema:EasyText(player, "peru", "This set of armor is broken and cannot be used!");
+			Schema:EasyText(player, "peru", "Cet ensemble d'armure est cassé et ne peut pas être utilisé!");
 			return false;
 		end
 	
 		if (table.HasValue(self.excludeFactions, kinisgerOverride or faction)) then
-			Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+			Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne faction pour porter cela!")
 			return false
 		end
 		
 		if (table.HasValue(self.excludeSubfactions, kinisgerOverrideSubfaction or subfaction)) then
-			Schema:EasyText(player, "peru", "Your subfaction cannot wear this!")
+			Schema:EasyText(player, "peru", "Votre sous-faction ne peut pas porter cela!")
 			return false
 		end
 		
 		if #self.requireFaith > 0 then
 			if (!table.HasValue(self.requireFaith, player:GetFaith())) then
-				Schema:EasyText(player, "chocolate", "You are not the correct faith for this item!")
+				Schema:EasyText(player, "chocolate", "Vous n'êtes pas de la bonne foi pour cet article!")
 				return false
 			end
 		end
 		
 		if #self.requireFaction > 0 then
 			if (!table.HasValue(self.requireFaction, faction) and (!kinisgerOverride or !table.HasValue(self.requireFaction, kinisgerOverride))) then
-				Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+				Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne faction pour porter cela!")
 				
 				return false
 			end
@@ -304,14 +304,14 @@ local ITEM = item.New(nil, true);
 		
 		if #self.requireSubfaction > 0 then
 			if (!table.HasValue(self.requireSubfaction, subfaction) and (!kinisgerOverrideSubfaction or !table.HasValue(self.requireSubfaction, kinisgerOverrideSubfaction))) then
-				Schema:EasyText(player, "peru", "You are not the correct subfaction to wear this!")
+				Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne sous-faction pour porter cela!")
 				
 				return false
 			end
 		end
 	
 		if (self.whitelist and !table.HasValue(self.whitelist, player:GetFaction())) then
-			Schema:EasyText(player, "peru", "Your faction cannot wear this.")
+			Schema:EasyText(player, "peru", "Votre faction ne peut pas porter cela.")
 			return false
 		end
 		
@@ -319,7 +319,7 @@ local ITEM = item.New(nil, true);
 			local helmetItem = player:GetHelmetEquipped();
 			
 			if helmetItem then
-				Schema:EasyText(player, "peru", "You cannot wear this, as this set of armor has a helmet and you already have a helmet equipped!")
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas porter cela, car cet ensemble d’armure a un casque et vous avez déjà un casque équipé !")
 				return false
 			end
 		end
@@ -330,7 +330,7 @@ local ITEM = item.New(nil, true);
 			if clothesItem then
 				if clothesItem.attributes and table.HasValue(clothesItem.attributes, "not_unequippable") then
 					if !self.attributes or !table.HasValue(self.attributes, "not_unequippable") then
-						Schema:EasyText(player, "peru", "You cannot wear this, as your current armor is grafted into your skin and fused with your flesh, and cannot be unequipped!")
+						Schema:EasyText(player, "peru", "Vous ne pouvez pas porter cela, car votre armure actuelle est greffée sur votre peau et fusionnée avec votre chair, et ne peut pas être déséquipée !")
 						return false;
 					end
 				end
@@ -339,7 +339,7 @@ local ITEM = item.New(nil, true);
 			if (!self.CanPlayerWear or self:CanPlayerWear(player, itemEntity) != false) then
 				if itemEntity then
 					if (Clockwork.entity:BelongsToAnotherCharacter(player, itemEntity)) then
-						Schema:EasyText(player, "peru", "You cannot pick up items you've dropped on another character!");
+						Schema:EasyText(player, "peru", "Vous ne pouvez pas ramasser les objets que vous avez laissés tomber sur un autre personnage!");
 						
 						return false;
 					end
@@ -367,7 +367,7 @@ local ITEM = item.New(nil, true);
 									self:OnUse(player, itemEntity, true);
 								end
 							else
-								Schema:EasyText(player, "peru", "The item you are attempting to put on is no longer valid!");
+								Schema:EasyText(player, "peru", "L'article que vous essayez de porter n'est plus valide !");
 							end
 						end
 					end);
@@ -382,7 +382,7 @@ local ITEM = item.New(nil, true);
 						player:SetItemEntity(nil);
 					--elseif !player:HasItemByID(self.itemID) then
 					elseif !Clockwork.inventory:HasItemInstance(player:GetInventory(), self) then
-						Schema:EasyText(player, "peru", "The item you are attempting to put on is no longer valid!");
+						Schema:EasyText(player, "peru", "L'article que vous essayez de porter n'est plus valide!");
 						
 						return false;
 					end
@@ -415,7 +415,7 @@ local ITEM = item.New(nil, true);
 				end
 			end
 		else
-			Schema:EasyText(player, "peru", "You cannot do this action at this moment.")
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas effectuer cette action pour le moment.")
 		end
 
 		return false;

@@ -122,7 +122,7 @@ function Clockwork.chatBox:AddInRadius(speaker, class, text, position, radius, d
 	self:Add(listeners, speaker, class, text, data);
 	
 	if #outOfRangeListeners > 0 then
-		self:Add(outOfRangeListeners, speaker, "me", "yells something but you are too far away to understand!", data);
+		self:Add(outOfRangeListeners, speaker, "me", "crie quelque chose mais tu es trop loin pour comprendre!", data);
 	end
 end;
 

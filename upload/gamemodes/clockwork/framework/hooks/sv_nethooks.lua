@@ -149,9 +149,9 @@ netstream.Hook("UnpermakillCharacter", function(player, data)
 				--plugin.Call("PlayerCharacterDataChanged", target, "permakilled", oldValue, false)
 				hook.Run("PlayerCharacterDataChanged", target, "permakilled", oldValue, false)
 				local name = character.name or "N/A"
-				Schema:EasyText(player, "cornflowerblue", "You have unpermakilled "..target:SteamName().."'s character \""..name.."\"!");
+				Schema:EasyText(player, "cornflowerblue", "Vous avez tué sans autorisation "..target:SteamName().." personnage \""..name.."\"!");
 			else
-				Schema:EasyText(player, "grey", "This character is not permakilled!");
+				Schema:EasyText(player, "grey", "Ce personnage n'est pas permakillé !");
 			end
 		
 			Clockwork.player:SaveCharacter(player);
@@ -186,7 +186,7 @@ netstream.Hook("DoorManagement", function(player, data)
 						local doors = Clockwork.player:GetDoorCount(player)
 
 						if (doors == config.Get("max_doors"):Get()) then
-							Schema:EasyText(player, "peru", "You cannot purchase another door!")
+							Schema:EasyText(player, "peru", "Vous ne pouvez pas acheter une autre porte!")
 						else
 							local doorCost = config.Get("door_cost"):Get()
 
@@ -203,7 +203,7 @@ netstream.Hook("DoorManagement", function(player, data)
 
 								Clockwork.player:GiveDoor(player, data[1])
 							else
-								Schema:EasyText(player, "olive", "You need another "..Clockwork.kernel:FormatCash(doorCost - player:GetCash(), nil, true).."!");
+								Schema:EasyText(player, "olive", "Tu as besoin d'un autre "..Clockwork.kernel:FormatCash(doorCost - player:GetCash(), nil, true).."!");
 							end
 						end
 					end
@@ -375,10 +375,10 @@ netstream.Hook("UnequipItem", function(player, data)
 	
 	if cwDueling then
 		if player.opponent then
-			Schema:EasyText(player, "peru", "You cannot unequip items while in a duel!");
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas déséquiper d'objets pendant un duel!");
 			return;
 		elseif cwDueling:PlayerIsInMatchmaking(player) then
-			Schema:EasyText(player, "peru", "You cannot unequip items while matchmaking for a duel!");
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas déséquiper d’objets pendant le matchmaking pour un duel !");
 			return;
 		end
 	end
@@ -453,14 +453,14 @@ netstream.Hook("MergeRepair", function(player, data)
 				local repaireeCondition = repaireeItemTable:GetCondition();
 				
 				if repairerCondition <= 0 then
-					Schema:EasyText(player, "peru", "You cannot repair an item with a broken item!");
+					Schema:EasyText(player, "peru", "Vous ne pouvez pas réparer un article avec un article cassé !");
 					return;
 				end
 			
 				if repaireeCondition < 100 then
 					if repaireeCondition <= 0 then
 						if cwBeliefs and !player:HasBelief("artisan") then
-							Schema:EasyText(player, "peru", "The "..(repaireeItemTable.name or "item").." is broken and cannot be repaired without the 'Artisan' belief!");
+							Schema:EasyText(player, "peru", "Le "..(repaireeItemTable.name or "item").." est cassé et ne peut pas être réparé sans la croyance 'Artisan' !");
 							return;
 						end
 					end
@@ -469,13 +469,13 @@ netstream.Hook("MergeRepair", function(player, data)
 					
 					player:TakeItem(repairerItemTable, true);
 					
-					Schema:EasyText(player, "cornflowerblue", "You have repaired a "..(repaireeItemTable.name or "item").." with another item of its type.");
+					Schema:EasyText(player, "cornflowerblue", "Vous avez réparé un "..(repaireeItemTable.name or "item").." avec un autre objet de son type.");
 				else
-					Schema:EasyText(player, "peru", "The "..(repaireeItemTable.name or "item").." you are trying to repair is not damaged!");
+					Schema:EasyText(player, "peru", "Le "..(repaireeItemTable.name or "item").." vous essayez de réparer n'est pas endommagé!");
 					return;
 				end
 			else
-				Schema:EasyText(player, "peru", "The "..(repaireeItemTable.name or "item").." cannot be repaired with another item without the 'Mechanic' belief!");
+				Schema:EasyText(player, "peru", "Le "..(repaireeItemTable.name or "item").." ne peut pas être réparé avec un autre objet sans la croyance 'Mécanicien'!");
 			end
 		end
 	end

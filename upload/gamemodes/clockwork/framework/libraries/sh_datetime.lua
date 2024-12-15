@@ -37,7 +37,7 @@ end
 
 -- A function to get the day name.
 function Clockwork.time:GetDayName()
-	local defaultDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+	local defaultDays = {"Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"};
 
 	if (defaultDays) then
 		return defaultDays[tonumber(self:GetDay())] or "Unknown"

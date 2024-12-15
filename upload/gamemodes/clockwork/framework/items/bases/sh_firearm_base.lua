@@ -2,7 +2,7 @@ local Clockwork = Clockwork;
 
 local ITEM = Clockwork.item:New(nil, true);
 ITEM.name = "Firearm Base";
-ITEM.useText = "Equip";
+ITEM.useText = "Équiper";
 ITEM.useSound = false;
 ITEM.category = "Firearms";
 ITEM.useInVehicle = false;
@@ -78,13 +78,13 @@ function ITEM:Engrave(player, text, engravingItemTable)
 	local nospaces = string.gsub(text,"%s+","")
 	
 	if string.len(text) > 32 then
-		Schema:EasyText(player, "chocolate", "This name is too long!");
+		Schema:EasyText(player, "chocolate", "Ce nom est trop long!");
 	elseif #nospaces == 0 then
-		Schema:EasyText(player, "peru", "You can't leave this blank!");
+		Schema:EasyText(player, "peru", "Vous ne pouvez pas laisser ce champ vide!");
 	else
 		self:SetData("engraving", text);
 		player:TakeItem(engravingItemTable, true);
-		Schema:EasyText(player, "olivedrab", "You engrave \'"..text.."\' into the side of your weapon.");
+		Schema:EasyText(player, "olivedrab", "Vous gravez \'"..text.."\' sur le côté de ton arme.");
 		Clockwork.inventory:Rebuild(player);
 	end;
 end;
@@ -97,7 +97,7 @@ if (SERVER) then
 	function ITEM:OnCustomFunction(player, name)
 		if (name == "Engrave") then
 			if self:GetData("engraving") != "" then
-				Schema:EasyText(player, "peru", "This weapon has already been engraved!");
+				Schema:EasyText(player, "peru", "Cette arme a déjà été gravée!");
 			elseif cwBeliefs and !player:HasBelief("literacy") then
 				Schema:EasyText(player, "chocolate", "You are not literate!");
 			else
@@ -112,11 +112,11 @@ if (SERVER) then
 				end
 	
 				if engravingItemTable then
-					Clockwork.dermaRequest:RequestString(player, "Engrave Weapon", "What would you like to etch on this item?", "", function(result)
+					Clockwork.dermaRequest:RequestString(player, "Engrave Weapon", "Que souhaitez-vous graver sur cet objet?", "", function(result)
 						self:Engrave(player, result, engravingItemTable);
 					end);
 				else
-					Schema:EasyText(player, "chocolate", "You do not have an item you can engrave this item with!");
+					Schema:EasyText(player, "chocolate", "Vous n'avez pas d'article avec lequel vous pouvez graver cet article!");
 					return false;
 				end
 			end;
@@ -269,7 +269,7 @@ function ITEM:OnPlayerUnequipped(player, extraData)
 					Clockwork.equipment:UnequipItem(player, self);
 				end
 			else
-				Schema:EasyText(player, "peru", "You cannot drop this item that far away.")
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas laisser tomber cet objet aussi loin.")
 			end
 		end
 	end
@@ -304,21 +304,21 @@ function ITEM:OnUse(player, itemEntity)
 
 	if (table.HasValue(self.excludeFactions, kinisgerOverride or faction)) then
 		if !table.HasValue(self.includeSubfactions, kinisgerOverrideSubfaction or subfaction) then
-			Schema:EasyText(player, "chocolate", "You are not the correct faction for this item!")
+			Schema:EasyText(player, "chocolate", "Vous n'êtes pas la bonne faction pour cet objet !")
 			return false
 		end
 	end
 	
 	if #self.requireFaith > 0 then
 		if (!table.HasValue(self.requireFaith, player:GetFaith())) then
-			Schema:EasyText(player, "peru", "You are not the correct faith for this item!")
+			Schema:EasyText(player, "peru", "Vous n'êtes pas de la bonne foi pour cet article!")
 			return false
 		end
 	end
 	
 	if #self.requireFaction > 0 then
 		if (!table.HasValue(self.requireFaction, faction) and (!kinisgerOverride or !table.HasValue(self.requireFaction, kinisgerOverride))) then
-			Schema:EasyText(player, "chocolate", "You are not the correct faction for this item!")
+			Schema:EasyText(player, "chocolate", "Vous n'êtes pas la bonne faction pour cet objet!")
 			return false
 		end
 	end
@@ -344,7 +344,7 @@ function ITEM:OnUse(player, itemEntity)
 			end;
 		end;
 		
-		Schema:EasyText(player, "peru", "You already have a weapon of this type equipped!")
+		Schema:EasyText(player, "peru", "Vous possédez déjà une arme de ce type équipée!")
 		
 		return false;
 	end;
@@ -357,7 +357,7 @@ end
 
 function ITEM:OnEquip(player)
 	if self:IsBroken() then
-		Schema:EasyText(player, "peru", "This weapon is broken and cannot be used!");
+		Schema:EasyText(player, "peru", "Cette arme est cassée et ne peut pas être utilisée!");
 		return false;
 	end
 
@@ -367,7 +367,7 @@ function ITEM:OnEquip(player)
 		end
 	end
 	
-	Schema:EasyText(player, "peru", "You do not have an open slot to equip this weapon in!")
+	Schema:EasyText(player, "peru", "Vous n'avez pas d'emplacement ouvert pour équiper cette arme dans!")
 	return false;
 end
 

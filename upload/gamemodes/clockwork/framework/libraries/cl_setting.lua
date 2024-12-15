@@ -164,7 +164,7 @@ function Clockwork.setting:AddSettings()
 	--Clockwork.setting:AddCheckBox("Chatbox", "Show out-of-character messages.", "cwShowOOC", "Whether or not to show you any out-of-character messages.");
 	--Clockwork.setting:AddCheckBox("Chatbox", "Show in-character messages.", "cwShowIC", "Whether or not to show you any in-character messages.");
 
-	Clockwork.setting:AddCheckBox("Framework", "Whether or not to show the admin console log.", "cwShowLog", "Enable the admin console log.", function()
+	Clockwork.setting:AddCheckBox("Framework", "Afficher ou non le journal de la console d'administration.", "cwShowLog", "Activer le journal de la console d'administration.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client)
 	end)
 
@@ -174,26 +174,26 @@ function Clockwork.setting:AddSettings()
 	--Clockwork.setting:AddCheckBox("Framework", "Enable the hints system.", "cwShowHints", "Whether or not to show you any hints.");
 	--Clockwork.setting:AddCheckBox("Framework", "Enable Vignette.", "cwShowVignette", "Whether or not to draw the vignette.");
 	
-	Clockwork.setting:AddCheckBox("Framework", "Enable derma tooltips following the mouse.", "cwTooltipFollow", "Whether or not derma tooltips follow the mouse. Nested tooltips will freeze in their current position when the timer is up.");
-	Clockwork.setting:AddCheckBox("Framework", "Enable physical description inspect key.", "cwPhysdescKey", "Whether or not to enable physical description inspection.");
+	Clockwork.setting:AddCheckBox("Framework", "Activer les info-bulles du derma en suivant la souris.", "cwTooltipFollow", "Indique si les infobulles de Derma suivent ou non la souris. Les infobulles imbriquées se figent dans leur position actuelle lorsque le minuteur est écoulé.");
+	Clockwork.setting:AddCheckBox("Framework", "Activer la clé d'inspection de la description physique.", "cwPhysdescKey", "Activer ou non l'inspection de la description physique.");
 
-	Clockwork.setting:AddCheckBox("Admin ESP", "Enable the admin ESP.", "cwAdminESP", "Whether or not to show the admin ESP.", function()
+	Clockwork.setting:AddCheckBox("Admin ESP", "Activer l'ESP administrateur.", "cwAdminESP", "Afficher ou non l'ESP de l'administrateur.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client);
 	end);
 
-	Clockwork.setting:AddCheckBox("Admin ESP", "Show item entities.", "cwItemESP", "Whether or not to view items in the admin ESP.", function()
+	Clockwork.setting:AddCheckBox("Admin ESP", "Afficher les entités d'élément.", "cwItemESP", "Afficher ou non les éléments dans l'ESP d'administration.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client);
 	end);
 
-	Clockwork.setting:AddCheckBox("Admin ESP", "Show salesmen entities.", "cwSaleESP", "Whether or not to view salesmen in the admin ESP.", function()
+	Clockwork.setting:AddCheckBox("Admin ESP", "Afficher les entités commerciales.", "cwSaleESP", "Afficher ou non les vendeurs dans l'ESP d'administration.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client);
 	end);
 
-	Clockwork.setting:AddNumberSlider("Admin ESP", "ESP Interval:", "cwESPTime", 0, 2, 0, "The amount of time between ESP checks.", function()
+	Clockwork.setting:AddNumberSlider("Admin ESP", "Intervalle ESP:", "cwESPTime", 0, 2, 0, "Le temps entre les contrôles ESP.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client);
 	end);
 	
-	Clockwork.setting:AddCheckBox("Admin ESP", "Enable ESP peek.", "cwESPPeek", "Whether or not ESP peek is enabled. Use the context menu to ESP peek.", function()
+	Clockwork.setting:AddCheckBox("Admin ESP", "Activer ESP peek.", "cwESPPeek", "Que l'aperçu ESP soit activé ou non. Utilisez le menu contextuel pour afficher un aperçu ESP.", function()
 		return Clockwork.player:IsAdmin(Clockwork.Client);
 	end);
 end

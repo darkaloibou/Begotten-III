@@ -12,9 +12,9 @@ local ITEM = Clockwork.item:New(nil, true)
 	ITEM.model = "models/tnb/items/shirt_citizen1.mdl"
 	ITEM.skin = 1
 	ITEM.weight = 1
-	ITEM.useText = "Wear"
+	ITEM.useText = "Porter"
 	ITEM.category = "Clothing"
-	ITEM.description = "Default Bodygroup Clothing Item."
+	ITEM.description = "Article de vêtement Bodygroup par défaut."
 	ITEM.excludeFactions = {};
 	ITEM.requireFaction = {};
 	ITEM.requireFaith = {};
@@ -61,7 +61,7 @@ local ITEM = Clockwork.item:New(nil, true)
 
 				return true
 			else
-				Schema:EasyText(player, "peru", "You cannot wear this!")
+				Schema:EasyText(player, "peru", "Tu ne peux pas porter ça !")
 
 				return false
 			end
@@ -130,42 +130,42 @@ local ITEM = Clockwork.item:New(nil, true)
 		local kinisgerOverrideSubfaction = player:GetNetVar("kinisgerOverrideSubfaction");
 		
 		if cwPowerArmor and player:IsWearingPowerArmor() then
-			Schema:EasyText(player, "peru", "You cannot wear this while in power armor!");
+			Schema:EasyText(player, "peru", "Vous ne pouvez pas porter cela lorsque vous portez une armure assistée!");
 			return false;
 		end
 		
 		if self:IsBroken() then
-			Schema:EasyText(player, "peru", "This helmet is broken and cannot be used!");
+			Schema:EasyText(player, "peru", "Ce casque est cassé et ne peut pas être utilisé!");
 			return false;
 		end
 		
 		if (table.HasValue(self.excludeFactions, kinisgerOverride or faction)) then
-			Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+			Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne faction pour porter cela!")
 			return false
 		end
 		
 		if (table.HasValue(self.excludeSubfactions, kinisgerOverrideSubfaction or subfaction)) then
-			Schema:EasyText(player, "peru", "Your subfaction cannot wear this!")
+			Schema:EasyText(player, "peru", "Votre sous-faction ne peut pas porter cela!")
 			return false
 		end
 		
 		if #self.requireFaith > 0 then
 			if (!table.HasValue(self.requireFaith, player:GetFaith())) then
-				Schema:EasyText(player, "chocolate", "You are not the correct faith for this item!")
+				Schema:EasyText(player, "chocolate", "Vous n'êtes pas de la bonne foi pour cet article!")
 				return false
 			end
 		end
 		
 		if #self.requireFaction > 0 then
 			if (!table.HasValue(self.requireFaction, faction) and (!kinisgerOverride or !table.HasValue(self.requireFaction, kinisgerOverride))) then
-				Schema:EasyText(player, "peru", "You are not the correct faction to wear this!")
+				Schema:EasyText(player, "peru", "Vous n'êtes pas la bonne faction pour porter cela!")
 				return false
 			end
 		end
 		
 		if clothesItem then
 			if clothesItem.hasHelmet then
-				Schema:EasyText(player, "peru", "You cannot wear this helmet, as your equipped armor already has one!")
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas porter ce casque, car votre armure équipée en possède déjà un.!")
 				return false
 			end
 		end
@@ -173,7 +173,7 @@ local ITEM = Clockwork.item:New(nil, true)
 		if helmetItem then
 			if helmetItem.attributes and table.HasValue(helmetItem.attributes, "not_unequippable") then
 				if !self.attributes or !table.HasValue(self.attributes, "not_unequippable") then
-					Schema:EasyText(player, "peru", "You cannot wear this, as your current helmet is grafted into your skin and fused with your flesh, and cannot be unequipped!");
+					Schema:EasyText(player, "peru", "Vous ne pouvez pas le porter, car votre casque actuel est greffé sur votre peau et fusionné avec votre chair, et ne peut pas être déséquipé.!");
 					return false;
 				end
 			end
@@ -189,7 +189,7 @@ local ITEM = Clockwork.item:New(nil, true)
 				return true
 			end
 		else
-			Schema:EasyText(player, "peru", "You cannot wear this!")
+			Schema:EasyText(player, "peru", "Tu ne peux pas porter ça!")
 
 			return false
 		end
@@ -216,7 +216,7 @@ local ITEM = Clockwork.item:New(nil, true)
 						end
 					end
 				else
-					Clockwork.player:Notify(player, "You cannot drop the item that far away!");
+					Clockwork.player:Notify(player, "Vous ne pouvez pas laisser tomber l'objet aussi loin!");
 				end
 			end
 		

@@ -26,7 +26,7 @@ local table = table
 	Phrases
 --]]
 
-local MODULE_NOT_EXIST = "[Clockwork:Database] The %s module does not exist!\n"
+local MODULE_NOT_EXIST = "[Clockwork:Database] Le module %s n'existe pas!\n"
 
 --[[
 	Begin Query Class.

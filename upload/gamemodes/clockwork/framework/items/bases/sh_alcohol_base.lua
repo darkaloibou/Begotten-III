@@ -7,8 +7,8 @@
 
 local ITEM = item.New(nil, true);
 	ITEM.name = "Alcohol Base"
-	ITEM.useText = "Drink"
-	ITEM.category = "Alcohol"
+	ITEM.useText = "Boire"
+	ITEM.category = "s"
 	ITEM.useSound = {"npc/barnacle/barnacle_gulp1.wav", "npc/barnacle/barnacle_gulp2.wav"}
 	ITEM.expireTime = 1800
 	ITEM.attributes = {}

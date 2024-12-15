@@ -545,7 +545,7 @@ else
 	
 	function Clockwork.inventory:InventoryAction(player, itemAction, uniqueID, itemID, interactUniqueID, interactItemID)
 		if !player:Alive() or player:IsRagdolled() or player:GetNetVar("tied") != 0 then
-			Clockwork.player:Notify(player, "You cannot use items right now!");
+			Clockwork.player:Notify(player, "Vous ne pouvez pas utiliser d'objets pour le moment!");
 			
 			return false;
 		end
@@ -578,7 +578,7 @@ else
 				
 				if itemCondition <= 0 then
 					if !cwBeliefs or !player:HasBelief("artisan") then
-						Clockwork.player:Notify(player, "You cannot repair broken items!");
+						Clockwork.player:Notify(player, "Vous ne pouvez pas réparer les objets cassés!");
 						return false;
 					end
 				end
@@ -607,20 +607,20 @@ else
 									player:TakeItem(repairItemTable, true);
 									
 									player:EmitSound("generic_ui/randomize_0"..math.random(1, 2)..".wav")
-									Schema:EasyText(player, "olivedrab", "You have repaired your "..itemTable.name.." to "..tostring(math.Round(itemTable:GetCondition(), 2))..", using the last of the repair kit's parts in the process.");
+									Schema:EasyText(player, "olivedrab", "Vous avez réparé votre "..itemTable.name.." à "..tostring(math.Round(itemTable:GetCondition(), 2))..", en utilisant la dernière pièce du kit de réparation dans le processus.");
 								else
 									player:EmitSound("generic_ui/randomize_0"..math.random(1, 2)..".wav")
-									Schema:EasyText(player, "green", "You have repaired your "..itemTable.name.." to "..tostring(math.Round(itemTable:GetCondition(), 2))..".");
+									Schema:EasyText(player, "green", "Vous avez réparé votre "..itemTable.name.." à "..tostring(math.Round(itemTable:GetCondition(), 2))..".");
 									Clockwork.inventory:Rebuild(player);
 								end
 							else
-								Schema:EasyText(player, "chocolate", "You do not have an item you can repair this item with!");
+								Schema:EasyText(player, "chocolate", "Vous n'avez pas d'objet avec lequel vous pouvez réparer cet objet !");
 								return false;
 							end
 						end
 					end
 				else
-					Clockwork.player:Notify(player, "This item is already in perfect condition and cannot be repaired.");
+					Clockwork.player:Notify(player, "Cet article est déjà en parfait état et ne peut pas être réparé.");
 					return false;
 				end
 			elseif (itemAction == "breakdown") then
@@ -645,7 +645,7 @@ else
 											end
 										end
 										
-										Clockwork.player:Notify(player, "You have melted down your "..itemTable.name.." into its component pieces.");
+										Clockwork.player:Notify(player, "Tu as fait fondre ton "..itemTable.name.." en ses pièces constitutives.");
 										player:EmitSound("generic_ui/smelt_success_02.wav");
 										
 										if cwBeliefs then
@@ -676,15 +676,15 @@ else
 								end
 								
 								if not smithy_found then
-									Clockwork.player:Notify(player, "You must be standing near a smithy to melt down this item!");
+									Clockwork.player:Notify(player, "Vous devez vous tenir près d'une forge pour faire fondre cet objet!");
 									return false;
 								end
 							else
-								Clockwork.player:Notify(player, "You must have the 'Smith' belief to melt down this item!");
+								Clockwork.player:Notify(player, "Vous devez avoir la croyance « Smith » pour faire fondre cet objet!");
 								return false;
 							end
 						else
-							Clockwork.player:Notify(player, "You need charcoal to melt down this item!");
+							Clockwork.player:Notify(player, "Vous avez besoin de charbon de bois pour faire fondre cet objet!");
 						end
 					elseif itemTable.components.breakdownType == "breakdown" then
 						local itemList = Clockwork.inventory:GetItemsAsList(player:GetInventory());
@@ -713,7 +713,7 @@ else
 									end
 								end
 							
-								Clockwork.player:Notify(player, "You have broken down your "..itemTable.name.." into its component pieces.");
+								Clockwork.player:Notify(player, "Vous avez cassé votre "..itemTable.name.." en ses pièces constitutives.");
 								player:EmitSound("generic_ui/takeall_03.wav");
 								
 								if cwBeliefs then
@@ -731,7 +731,7 @@ else
 								--Clockwork.player:Notify(player, "You do not have enough workable tools left in your breakdown kit to break down this item!");
 							--end
 						else
-							Clockwork.player:Notify(player, "You do not have an item you can break down this item with!");
+							Clockwork.player:Notify(player, "Vous n'avez pas d'élément avec lequel vous pouvez décomposer cet élément!");
 							return false;
 						end
 					end
@@ -748,11 +748,11 @@ else
 						item.Drop(player, itemTable, position);
 					end;
 				else
-					Clockwork.player:Notify(player, "You cannot drop the item that far away!");
+					Clockwork.player:Notify(player, "Vous ne pouvez pas laisser tomber l'objet aussi loin!");
 				end;
 			elseif (itemAction == "use") then
 				if (player:InVehicle() and itemTable.useInVehicle == false) then
-					Clockwork.player:Notify(player, "You cannot use this item in a vehicle!");
+					Clockwork.player:Notify(player, "Vous ne pouvez pas utiliser cet article dans un véhicule !");
 					
 					return;
 				end;
@@ -774,32 +774,32 @@ else
 					local itemKills = itemTable:GetData("kills");
 					
 					if itemKills and itemKills > 0 then
-						examineText = examineText.." It has \'"..itemEngraving.."\' engraved into it, alongside a tally mark of "..tostring(itemKills).." kills.";
+						examineText = examineText.." Il a \'"..itemEngraving.."\' gravé dessus, à côté d'une marque de décompte de "..tostring(itemKills).." tué(s).";
 					else
-						examineText = examineText.." It has \'"..itemEngraving.."\' engraved into it.";
+						examineText = examineText.." Il a \'"..itemEngraving.."\' gravé dedans.";
 					end
 				end
 				
 				if table.HasValue(conditionTextCategories, itemTable.category) then
 					if itemCondition >= 90 then
-						examineText = examineText.." It appears to be in immaculate condition.";
+						examineText = examineText.." Il semble être dans un état impeccable.";
 					elseif itemCondition < 90 and itemCondition >= 60 then
-						examineText = examineText.." It appears to be in a somewhat battered condition.";
+						examineText = examineText.." Il semble être dans un état quelque peu abîmé.";
 					elseif itemCondition < 60 and itemCondition >= 30 then
-						examineText = examineText.." It appears to be in very poor condition.";
+						examineText = examineText.." Il semble être en très mauvais état.";
 					elseif itemCondition < 30 and itemCondition > 0 then
-						examineText = examineText.." It appears to be on the verge of breaking.";
+						examineText = examineText.." Il semble être sur le point de se briser.";
 					elseif itemCondition <= 0 then
 						if itemTable:IsBroken() then
-							examineText = examineText.." It is completely destroyed and only worth its weight in scrap now.";
+							examineText = examineText.." Il est complètement détruit et ne vaut plus que son poids en ferraille maintenant.";
 						else
-							examineText = examineText.." It is broken yet still usable to some degree.";
+							examineText = examineText.." Il est cassé mais encore utilisable dans une certaine mesure.";
 						end
 					end
 				elseif itemTable.category == "Shot" and itemTable.ammoMagazineSize then
 					local rounds = itemTable:GetAmmoMagazine();
 					
-					examineText = examineText.." The magazine has "..tostring(rounds).." "..itemTable.ammoName.." rounds loaded.";
+					examineText = examineText.." Le magazine a "..tostring(rounds).." "..itemTable.ammoName.." cartouches chargées.";
 				end
 
 				Clockwork.player:Notify(player, examineText);
@@ -859,7 +859,7 @@ else
 				hook.Run("PlayerUseUnknownItemFunction", player, itemTable, itemAction, interactUniqueID, interactItemID);
 			end;
 		else
-			Clockwork.player:Notify(player, "You do not own this item!");
+			Clockwork.player:Notify(player, "Vous ne possédez pas cet article !");
 		end;
 	end
 	

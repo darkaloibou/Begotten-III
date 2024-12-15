@@ -6,12 +6,12 @@
 --]]
 
 local ITEM = item.New(nil, true);
-	ITEM.name = "Enchanted Base"
+	ITEM.name = "Base enchantée"
 	ITEM.model = "models/props_c17/suitcase_passenger_physics.mdl"
 	ITEM.weight = 2
-	ITEM.useText = "Equip"
+	ITEM.useText = "Équiper"
 	ITEM.category = "Charms"
-	ITEM.description = "An enchanted item with a mysterious aura."
+	ITEM.description = "Un objet enchanté avec une aura mystérieuse."
 	ITEM.requireFaith = nil;
 	ITEM.slots = {"Charm1", "Charm2"};
 	ITEM.equipmentSaveString = "charms";
@@ -59,7 +59,7 @@ local ITEM = item.New(nil, true);
 	function ITEM:OnDrop(player, position)
 		if (self:HasPlayerEquipped(player)) then
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You cannot drop an item you're currently wearing.")
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas laisser tomber un article que vous portez actuellement.")
 			end
 			
 			return false
@@ -70,7 +70,7 @@ local ITEM = item.New(nil, true);
 	function ITEM:OnUse(player, itemEntity)
 		if (self:HasPlayerEquipped(player)) then
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You already have a charm of this type equipped!")
+				Schema:EasyText(player, "peru", "Vous avez déjà un charme de ce type équipé!")
 			end
 			
 			return false
@@ -79,7 +79,7 @@ local ITEM = item.New(nil, true);
 		if self.requireFaith and not (table.HasValue(self.requireFaith, player:GetFaith())) then
 			if !self.kinisgerOverride or self.kinisgerOverride and !player:GetCharacterData("apostle_of_many_faces") then
 				if !player.spawning then
-					Schema:EasyText(player, "chocolate", "You are not of the correct faith to wear this!")
+					Schema:EasyText(player, "chocolate", "Vous n'êtes pas de la bonne foi pour porter cela!")
 				end
 				
 				return false
@@ -89,7 +89,7 @@ local ITEM = item.New(nil, true);
 		if self.requiredSubfaiths and not (table.HasValue(self.requiredSubfaiths, player:GetSubfaith())) then
 			if !self.kinisgerOverride or self.kinisgerOverride and !player:GetCharacterData("apostle_of_many_faces") then
 				if !player.spawning then
-					Schema:EasyText(player, "chocolate", "You are not of the correct subfaith to wear this!")
+					Schema:EasyText(player, "chocolate", "Vous n'êtes pas de la bonne sous-confession pour porter cela!")
 				end
 				
 				return false
@@ -100,7 +100,7 @@ local ITEM = item.New(nil, true);
 			for i, v in ipairs(self.mutuallyExclusive) do
 				if player:GetCharmEquipped(v) then
 					if !player.spawning then
-						Schema:EasyText(player, "chocolate", "This charm is mutually exclusive with another equipped charm!")
+						Schema:EasyText(player, "chocolate", "Ce charme est mutuellement exclusif avec un autre charme équipé!")
 					end
 					
 					return false
@@ -124,13 +124,13 @@ local ITEM = item.New(nil, true);
 			end
 	
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You do not have an open slot to equip this charm in!")
+				Schema:EasyText(player, "peru", "Vous n'avez pas d'emplacement ouvert pour équiper ce charme dans!")
 			end
 			
 			return false;
 		else
 			if !player.spawning then
-				Schema:EasyText(player, "peru", "You cannot do this action at this moment.")
+				Schema:EasyText(player, "peru", "Vous ne pouvez pas effectuer cette action pour le moment.")
 			end
 		end
 

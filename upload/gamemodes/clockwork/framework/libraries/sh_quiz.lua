@@ -157,7 +157,7 @@ else
 			return self.kickCallback
 		else
 			return function(player, correctAnswers)
-				player:Kick("You got too many questions wrong!")
+				player:Kick("Vous avez trop de questions fausses!")
 			end
 		end
 	end
